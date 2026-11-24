@@ -1,3 +1,4 @@
+import { Q } from './quality.js';
 // Animated life: falling petals, water ripples, dust motes, fireflies, mist, spray,
 // chimney smoke, birds, koi and swaying paper lanterns.
 import * as THREE from 'three';
@@ -67,7 +68,7 @@ class Ripples {
 // ---------------- falling petals ----------------
 class Petals {
   constructor(T, ripples) {
-    this.N = 3000;
+    this.N = Q.low ? 1400 : 3000;
     this.ripples = ripples;
     const g = new THREE.PlaneGeometry(1, 1, 2, 2);
     const p = g.attributes.position;

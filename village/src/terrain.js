@@ -1,3 +1,4 @@
+import { Q } from './quality.js';
 // Terrain mesh with warped grid (dense in the village, sparse far away) + ground mask.
 import * as THREE from 'three';
 import { layout, height, riverXAt, LOWER, LAND_Y, cliffZ, UPPER_Y, baseHeight } from './world.js';
@@ -131,7 +132,7 @@ export function forestAmount(x, z, h) {
 }
 
 export function buildTerrain(maskTex) {
-  const N = 560;
+  const N = Q.low ? 420 : 560;
   const n1 = N + 1;
   const pos = new Float32Array(n1 * n1 * 3);
   const gnd = new Float32Array(n1 * n1 * 3);

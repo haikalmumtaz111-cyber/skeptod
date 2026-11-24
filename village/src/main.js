@@ -11,6 +11,9 @@ import { buildVegetation } from './vegetation.js';
 import { buildLife } from './life.js';
 import { Pipeline } from './post.js';
 import { box, cyl, M, mul, segMatrix } from './geom.js';
+import { Q } from './quality.js';
+
+const tick = () => new Promise((r) => setTimeout(r, 0));
 
 const params = new URLSearchParams(location.search);
 const fixedT = params.has('t') ? parseFloat(params.get('t')) : null;
@@ -89,9 +92,12 @@ const SHOTS = [
 ];
 const LOOP = 140;
 
-function main() {
+async function main() {
   patchFogChunks();
   const canvas = document.getElementById('c');
+  if (!document.createElement('canvas').getContext('webgl2')) throw new Error('WebGL2 unavailable');
+  canvas.addEventListener('webglcontextlost', (e) => e.preventDefault());
+  canvas.addEventListener('webglcontextrestored', () => location.reload());
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', stencil: false });
   renderer.setClearColor(0x000000, 1);
   renderer.shadowMap.enabled = true;
@@ -107,11 +113,14 @@ function main() {
   camera.layers.enable(1); camera.layers.enable(2);
 
   buildHeightfield();
+  await tick();
   const T = makeTextures();
   const maskTex = buildGroundMask();
+  await tick();
   scene.add(buildSky());
   scene.add(buildMountains());
   scene.add(buildTerrain(maskTex));
+  await tick();
 
   // architecture
   const b = buildArchitecture();
@@ -132,6 +141,7 @@ function main() {
     }
     for (let i = 0; i < 10; i++) { const { m, len } = segMatrix(pts[i], pts[i + 1]); b.add('wood', box(0.025, 0.025, len), m, C.dark); }
   }
+  await tick();
   const mats = archMaterials(T);
   const merged = b.merge();
   const archGroup = new THREE.Group();
@@ -143,6 +153,7 @@ function main() {
     archGroup.add(mesh);
   }
   scene.add(archGroup);
+  await tick();
 
   const stones = buildStones(T);
   scene.add(stones);
@@ -150,7 +161,9 @@ function main() {
   scene.add(water);
   const fall = buildWaterfall(T);
   scene.add(fall);
+  await tick();
   scene.add(buildVegetation(T));
+  await tick();
   const life = buildLife(T, { foot: fall.userData.foot, smokeSources, hanging });
   scene.add(life.group);
 
@@ -161,7 +174,7 @@ function main() {
   sun.position.copy(center).addScaledVector(sunDir, 400);
   sun.target.position.copy(center);
   sun.castShadow = true;
-  const sm = renderer.capabilities.maxTextureSize >= 4096 ? 4096 : 2048;
+  const sm = !Q.low && renderer.capabilities.maxTextureSize >= 4096 ? 4096 : 2048;
   sun.shadow.mapSize.set(sm, sm);
   const sc = sun.shadow.camera;
   sc.left = -150; sc.right = 150; sc.top = 130; sc.bottom = -130; sc.near = 50; sc.far = 800;
@@ -175,7 +188,7 @@ function main() {
   fill.position.set(300, 120, 260);
   scene.add(fill);
   const pls = [];
-  lights.filter((l) => !l.small).sort((a, b2) => b2.i - a.i).slice(0, 5).forEach((l) => {
+  lights.filter((l) => !l.small).sort((a, b2) => b2.i - a.i).slice(0, Q.low ? 3 : 5).forEach((l) => {
     const p = new THREE.PointLight(new THREE.Color(1.0, 0.55, 0.22), 26 * l.i, 16, 2);
     p.position.set(l.x, l.y, l.z);
     p.userData.base = 26 * l.i;
@@ -194,6 +207,11 @@ function main() {
 
   const pipe = new Pipeline(renderer, scene, camera);
   pipe.hideInReflection.push(water, fall);
+  if (Q.low) {
+    // phones: skip the planar reflection pass, water reflects the sky gradient instead
+    pipe.reflectEnabled = false;
+    water.traverse((o) => { if (o.material && o.material.uniforms && o.material.uniforms.uReflOn) o.material.uniforms.uReflOn.value = 0; });
+  }
 
   // ---------- camera ----------
   const posCurve = new THREE.CatmullRomCurve3(SHOTS.map((s) => new THREE.Vector3(...s[0])), true, 'centripetal', 0.5);
@@ -241,13 +259,16 @@ function main() {
   canvas.addEventListener('wheel', () => { if (mode !== 'user') { const fwd = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion); controls.target.copy(camera.position).addScaledVector(fwd, Math.max(10, camPos.distanceTo(camTgt))); mode = 'user'; } lastInput = performance.now(); }, { passive: true, capture: true });
 
   // ---------- sizing / adaptive resolution ----------
-  const maxPR = forcedPR || Math.min(window.devicePixelRatio || 1, 1.75);
-  let pr = forcedPR || Math.min(maxPR, 1.25);
+  const maxPR = forcedPR || Math.min(window.devicePixelRatio || 1, Q.low ? 1.0 : 1.75);
+  const minPR = Q.low ? 0.5 : 0.6;
+  let pr = forcedPR || Math.min(maxPR, Q.low ? 0.8 : 1.25);
   function resize() {
     const w = innerWidth, h = innerHeight;
     renderer.setPixelRatio(pr);
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
+    // portrait screens: widen vertical FOV so the horizontal view does not collapse
+    camera.fov = camera.aspect < 1 ? Math.min(72, Math.max(42, 2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(29)) / camera.aspect) * THREE.MathUtils.RAD2DEG)) : 42;
     camera.updateProjectionMatrix();
     pipe.setSize(w, h, pr);
     life.setPR(pr);
@@ -319,7 +340,7 @@ function main() {
       frames++; acc += rdt;
       if (now - lastAdapt > 2500 && frames > 30) {
         const avg = acc / frames;
-        if (avg > 0.026 && pr > 0.6) { pr = Math.max(0.6, pr - 0.15); resize(); }
+        if (avg > 0.026 && pr > minPR) { pr = Math.max(minPR, pr - 0.15); resize(); }
         else if (avg < 0.0145 && pr < maxPR) { pr = Math.min(maxPR, pr + 0.1); resize(); }
         frames = 0; acc = 0; lastAdapt = now;
       }
@@ -345,9 +366,17 @@ function main() {
     console.log('MESHES ' + rows.slice(0, 25).map((r) => r.join(' | ')).join('\n'));
   }
   window.__renderer = renderer;
+  // compile shaders without stalling the first frame where the browser supports it
+  if (renderer.extensions.has('KHR_parallel_shader_compile')) {
+    try { await renderer.compileAsync(scene, camera); } catch (e) { /* compiled on first render instead */ }
+  }
   requestAnimationFrame(frame);
 }
 
 requestAnimationFrame(() => setTimeout(() => {
-  try { main(); } catch (e) { console.error(e); throw e; }
+  main().catch((e) => {
+    console.error(e);
+    const o = document.getElementById('o');
+    if (o) o.classList.add('f');
+  });
 }, 30));

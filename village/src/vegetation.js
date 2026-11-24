@@ -1,3 +1,4 @@
+import { Q } from './quality.js';
 // Vegetation: sakura (incl. weeping), pines, maples, bamboo, forests, grass, flowers.
 import * as THREE from 'three';
 import { mergeGeometries, mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
@@ -428,9 +429,9 @@ function buildBamboo(T, rng) {
   const group = new THREE.Group();
   const culms = [];
   const areas = [
-    { x0: 42, x1: 98, z0: -96, z1: -36, n: 640 },
-    { x0: -100, x1: -76, z0: -95, z1: -30, n: 330 },
-    { x0: 56, x1: 92, z0: 20, z1: 48, n: 230 },
+    { x0: 42, x1: 98, z0: -96, z1: -36, n: Math.round(640 * (Q.low ? 0.6 : 1)) },
+    { x0: -100, x1: -76, z0: -95, z1: -30, n: Math.round(330 * (Q.low ? 0.6 : 1)) },
+    { x0: 56, x1: 92, z0: 20, z1: 48, n: Math.round(230 * (Q.low ? 0.6 : 1)) },
   ];
   for (const A of areas) {
     for (let i = 0; i < A.n; i++) {
@@ -496,7 +497,7 @@ function colorize(g, c) {
 function buildForest(T, rng) {
   const group = new THREE.Group();
   const trees = [];
-  const tries = 24000;
+  const tries = Q.low ? 13000 : 24000;
   for (let i = 0; i < tries; i++) {
     const r = 60 + Math.pow(rng.next(), 1.35) * 600;
     const a = rng.range(0, Math.PI * 2);
@@ -598,7 +599,7 @@ function grassClump(rng) {
 function buildGrass(T, rng) {
   const items = [];
   const N = 80000;
-  for (let i = 0; i < N && items.length < 36000; i++) {
+  for (let i = 0; i < N && items.length < 36000 * Q.k; i++) {
     const x = rng.range(-120, 125), z = rng.range(-98, 120);
     const h = hAt(x, z);
     if (h < 0.08) continue;
@@ -677,7 +678,7 @@ function buildFlowers(T, rng) {
   // nanohana fields
   const fields = [{ x: -55, z: 92, rx: 22, rz: 12 }, { x: 44, z: 110, rx: 18, rz: 10 }, { x: -66, z: 64, rx: 10, rz: 7 }];
   for (const F of fields) {
-    for (let i = 0; i < 900; i++) {
+    for (let i = 0; i < 900 * Q.k; i++) {
       const a = rng.range(0, Math.PI * 2), r = Math.sqrt(rng.next());
       const x = F.x + Math.cos(a) * r * F.rx, z = F.z + Math.sin(a) * r * F.rz;
       if (maskAt(x, z)[2] > 0.2 || maskAt(x, z)[0] > 0.4) continue;
@@ -685,7 +686,7 @@ function buildFlowers(T, rng) {
     }
   }
   // wildflowers scattered
-  for (let i = 0; i < 2600; i++) {
+  for (let i = 0; i < 2600 * Q.k; i++) {
     const x = rng.range(-110, 110), z = rng.range(-95, 110);
     const m = maskAt(x, z);
     if (m[0] + m[1] + m[2] > 0.2) continue;

@@ -1,3 +1,4 @@
+import { Q } from './quality.js';
 // Post-processing: planar water reflection, god rays, bloom, cinematic grade.
 import * as THREE from 'three';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
@@ -77,7 +78,7 @@ export class Pipeline {
     this.r = renderer; this.scene = scene; this.camera = camera;
     this.size = new THREE.Vector2(1, 1);
     const hf = THREE.HalfFloatType;
-    this.sceneRT = new THREE.WebGLRenderTarget(1, 1, { type: hf, samples: 4, depthTexture: new THREE.DepthTexture(1, 1) });
+    this.sceneRT = new THREE.WebGLRenderTarget(1, 1, { type: hf, samples: Q.low ? 2 : 4, depthTexture: new THREE.DepthTexture(1, 1) });
     this.sceneRT.depthTexture.type = THREE.UnsignedIntType;
     this.reflRT = new THREE.WebGLRenderTarget(1, 1, { type: hf, samples: 0 });
     this.raysRT = new THREE.WebGLRenderTarget(1, 1, { type: hf });
@@ -98,8 +99,9 @@ export class Pipeline {
     const W = Math.floor(w * pr), H = Math.floor(h * pr);
     this.size.set(W, H);
     this.sceneRT.setSize(W, H);
-    this.reflRT.setSize(Math.floor(W * 0.5), Math.floor(H * 0.5));
-    this.raysRT.setSize(Math.floor(W * 0.5), Math.floor(H * 0.5));
+    const rs = Q.low ? 0.35 : 0.5;
+    this.reflRT.setSize(Math.floor(W * rs), Math.floor(H * rs));
+    this.raysRT.setSize(Math.floor(W * rs), Math.floor(H * rs));
     this.bloom.setSize(W, H);
     this.finalQuad.material.uniforms.uRes.value.set(W, H);
     waterUniforms.uRes.value.set(W, H);
