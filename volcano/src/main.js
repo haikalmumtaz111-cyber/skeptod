@@ -18,6 +18,7 @@ const TEST = params.has('test');
 const TEST_FRAMES = parseInt(params.get('frames') || '3', 10);
 const NO_BOLT = params.has('nobolt');
 const FORCE_BOLT = params.has('bolt');
+const DEBUG_CAM = TEST && params.get('cam') ? params.get('cam').split(',').map(Number) : null;
 const T_INIT = performance.now();
 const rnd = mulberry32(5150);
 
@@ -140,7 +141,7 @@ mainScene.add(fountain.makeMesh(glowU));
 const bombs = new GlowSystem(3500, sample, smoke, false);
 outerScene.add(bombs.makeMesh(glowU));
 mainScene.add(buildEmbers(glowU, lavaPts, [2600, 0, 0], true));
-outerScene.add(buildEmbers(glowU, lavaPts, [0, 4200, 2600], false));
+outerScene.add(buildEmbers(glowU, lavaPts, [0, 2300, 2400], false));
 
 // plume axis (wind-bent centreline) tabulated from the rise model
 const axisTab = [];
@@ -330,6 +331,10 @@ function frame(now) {
   step(dt, camPos);
   const t = E.t;
   cine.update(dt, t, E.shake, plumeAxis);
+  if (DEBUG_CAM) {
+    camera.position.set(DEBUG_CAM[0], DEBUG_CAM[1], DEBUG_CAM[2]);
+    camera.lookAt(DEBUG_CAM[3], DEBUG_CAM[4], DEBUG_CAM[5]);
+  }
   camera.updateMatrixWorld();
   camera.matrixWorldInverse.copy(camera.matrixWorld).invert();
 

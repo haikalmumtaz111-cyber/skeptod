@@ -47,7 +47,7 @@ export class CinematicCamera {
       { p: side(b, -340, 240), t: onRiver(a, -150, 20), fov: 52 },
       // rise up to the erupting crater (upwind side)
       { p: side(a, -300, 380, -1000), t: P(0, V.FLOOR_H + 60, 0), fov: 50 },
-      { p: P(-1400, 2850, -1150), t: P(0, V.FLOOR_H + 220, 0), fov: 48 },
+      { p: P(-1050, 3450, -850), t: P(0, V.FLOOR_H + 40, 0), fov: 50 },
       // pull back out
       { p: P(-5200, 1700, -12500), t: P(0, 3600, 0), fov: 46 },
     ];

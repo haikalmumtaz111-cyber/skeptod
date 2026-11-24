@@ -158,9 +158,9 @@ export function buildProps(sample, F, uniforms) {
   const pine = conifer(), dead = deadTree();
   const pines = [], deads = [];
   let tries = 0;
-  while ((pines.length < 9000 || deads.length < 1400) && tries < 120000) {
+  while ((pines.length < 16000 || deads.length < 1600) && tries < 260000) {
     tries++;
-    const a = rnd() * Math.PI * 2, r = 3800 + Math.pow(rnd(), 0.7) * 14500;
+    const a = rnd() * Math.PI * 2, r = 3800 + Math.pow(rnd(), 0.8) * 11500;
     const x = Math.cos(a) * r, z = Math.sin(a) * r;
     const forest = fbm2(x * 0.00045 + 5.1, z * 0.00045 - 3.3, 4) + 0.15 * smoothstep(5000, 11000, r);
     const lv = lavaAt(x, z);
@@ -169,9 +169,9 @@ export function buildProps(sample, F, uniforms) {
     if (onOld) continue;
     if (lv.act && lv.nd < 1.5) continue;
     const isDead = nearLava > 0.2 || (r < 5400 && rnd() < 0.5);
-    if (!isDead && forest < 0.08) continue;
-    if (isDead && deads.length >= 1400) continue;
-    if (!isDead && pines.length >= 9000) continue;
+    if (!isDead && (forest < 0.12 || rnd() > smoothstep(0.12, 0.4, forest))) continue;
+    if (isDead && deads.length >= 1600) continue;
+    if (!isDead && pines.length >= 16000) continue;
     const sl = slopeAt(x, z);
     if (sl > 0.42) continue;
     const y = sample(x, z);

@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 (async () => {
   const args = process.argv.slice(2);
-  const opts = Object.fromEntries(args.filter(a => a.startsWith('--')).map(a => a.slice(2).split('=')));
+  const opts = Object.fromEntries(args.filter(a => a.startsWith('--')).map(a => { const s = a.slice(2); const i = s.indexOf('='); return i < 0 ? [s, '1'] : [s.slice(0, i), s.slice(i + 1)]; }));
   const pos = args.filter(a => !a.startsWith('--'));
   const out = pos[0];
   const times = pos.slice(1).length ? pos.slice(1) : ['0'];

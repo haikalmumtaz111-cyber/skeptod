@@ -81,7 +81,7 @@ vec3 sceneIrradiance(vec3 P, vec3 N, float shadow, float ao, vec4 heat){
   irr += pointLight(P, N, uCraterPos, uCraterCol, 700.0, 0.25);
   irr += pointLight(P, N, uPlumePos, uPlumeCol, 3200.0, 0.35) * (0.35 + 0.65*ao);
   irr += pointLight(P, N, uBoltPos, uBoltCol, 2600.0, 0.4);
-  irr += LAVA_LIGHT * (heat.r * 5.5 + heat.g * 1.1) * (0.45 + 0.55*max(N.y, 0.0)) * (0.5 + 0.5*ao);
+  irr += LAVA_LIGHT * (heat.r * 5.0 + heat.g * 0.55) * (0.45 + 0.55*max(N.y, 0.0)) * (0.5 + 0.5*ao);
   return irr;
 }
 `;

@@ -140,6 +140,7 @@ void main(){
   // fade sprites that get too close to the camera
   float camFade = smoothstep(size * 0.15, size * 0.9, vViewZ);
   vAlpha = iPar.y * camFade;
+  if (vAlpha < 0.003) { gl_Position = vec4(2.0, 2.0, 2.0, 1.0); return; }
   mat3 vm = mat3(viewMatrix);
   float shade = iLit.y;
   float tint = iLit.z;
@@ -427,7 +428,7 @@ export class SmokeSystem {
         let size = (130 + 0.72 * colR) * this.s0[i];
         if (tu > 0) size *= 1 + Math.min(tu * 0.04, 0.9);
         this.size[i] = size;
-        const fadeIn = Math.min(age / 0.85, 1);
+        const fadeIn = Math.min(age / 1.15, 1) * Math.min(age / 1.15, 1);
         const fadeOut = 1 - Math.max(0, (lf - 0.72) / 0.28);
         this.shade[i] = Math.min(1, 0.25 + 0.75 * rf * rf + Math.max(0, (h - hn * 0.75) / (hn * 0.5)) * 0.6);
         this.heatv[i] *= Math.exp(-dt * 1.1);
@@ -447,11 +448,11 @@ export class SmokeSystem {
         this.x[i] += (this.vx[i] + Math.sin(t * 0.5 + sd) * 15) * dt;
         this.z[i] += (this.vz[i] + Math.cos(t * 0.43 + sd) * 15) * dt;
         const size = (230 + 1250 * Math.pow(lf, 0.65)) * this.s0[i];
-        this.vy[i] += ((10 + 40 * (1 - Math.min(sp / 200, 1))) - this.vy[i]) * (1 - Math.exp(-0.5 * dt));
+        this.vy[i] += ((6 + 22 * (1 - Math.min(sp / 200, 1))) - this.vy[i]) * (1 - Math.exp(-0.5 * dt));
         this.lift[i] += this.vy[i] * dt;
-        this.y[i] = sample(this.x[i], this.z[i]) + size * 0.3 + this.lift[i];
+        this.y[i] = sample(this.x[i], this.z[i]) + size * 0.22 + this.lift[i];
         this.size[i] = size;
-        this.shade[i] = 0.55 + 0.45 * Math.min(1, this.lift[i] / 400);
+        this.shade[i] = 0.35 + 0.3 * Math.min(1, this.lift[i] / 500);
         this.heatv[i] *= Math.exp(-dt * 0.35);
         this.under[i] = this.heatAt(this.x[i], this.z[i]) * 0.25;
         this.rot[i] += this.rotV[i] * dt * 0.4;
@@ -503,7 +504,7 @@ export class SmokeSystem {
       Q[o] = this.rot[i]; Q[o + 1] = eff[i]; Q[o + 2] = this.heatv[i]; Q[o + 3] = this.vari[i];
       const typ = this.type[i];
       L[o] = this.under[i]; L[o + 1] = this.shade[i];
-      L[o + 2] = typ === FUME ? 0.75 : typ === DUST ? 0.15 : typ === PDC ? 0.12 : 0.0;
+      L[o + 2] = typ === FUME ? 0.75 : typ === DUST ? 0.15 : 0.0;
       L[o + 3] = 0;
     }
     for (const a of [this.aPos, this.aPar, this.aLit]) {
@@ -538,7 +539,7 @@ bool streakQuad(vec3 p0, vec3 p1, float worldSize, out vec4 clip){
   vEnergy = max(min(sizePx * sizePx / (w * w), 1.0), uMinEnergy);
   vec2 d = s1 - s0;
   float len = length(d);
-  if (len > 400.0) { d *= 400.0 / len; len = 400.0; }
+  if (len > 160.0) { d *= 160.0 / len; len = 160.0; }
   vec2 dir = len > 1e-3 ? d / len : vec2(1.0, 0.0);
   vec2 nrm = vec2(-dir.y, dir.x);
   float along = position.x, side = position.y;
@@ -581,7 +582,9 @@ varying float vDepthV;
 void main(){
   vec4 clip;
   vec3 p0 = iPos.xyz;
-  vec3 p1 = p0 - iVel.xyz * uShutter * uShutterMul;
+  float camD = distance(p0, uCamPos);
+  float sm = mix(1.0, uShutterMul, smoothstep(700.0, 4500.0, camD));
+  vec3 p1 = p0 - iVel.xyz * uShutter * sm;
   if (!streakQuad(p0, p1, iPos.w, clip)) { gl_Position = clip; vCol = vec3(0.0); return; }
   gl_Position = clip;
   vec4 at = atmosphere(p0);
