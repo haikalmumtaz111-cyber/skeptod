@@ -366,6 +366,31 @@ async function main() {
     console.log('MESHES ' + rows.slice(0, 25).map((r) => r.join(' | ')).join('\n'));
   }
   window.__renderer = renderer;
+  if (params.has('capture')) {
+    // offline video capture: the host steps time explicitly and reads back each frame
+    pipe.finalQuad.material.uniforms.uGrain.value = 0.006;
+    overlay.style.transition = 'none';
+    overlay.style.opacity = '0';
+    window.__capture = (t, dt, render, fadeV) => {
+      simT = t;
+      U.time.value = t + 1000;
+      U.flicker.value = 0.94 + 0.06 * Math.sin(t * 13.0) * Math.sin(t * 7.3 + 1.0);
+      cine.t = t;
+      cinePose(t, camPos, camTgt);
+      camera.position.copy(camPos);
+      camera.lookAt(camTgt);
+      camera.updateMatrixWorld();
+      life.update(dt, t + 1000, camera.position);
+      if (!render) return null;
+      pls.forEach((p, i) => { p.intensity = p.userData.base * (0.9 + 0.1 * Math.sin(t * (9 + i) + i)); });
+      mats.shojiLit.emissiveIntensity = 1.9 * U.flicker.value;
+      renderer.info.reset();
+      pipe.render(dt, t, fadeV);
+      return canvas.toDataURL('image/png');
+    };
+    window.__ready = true;
+    return;
+  }
   // compile shaders without stalling the first frame where the browser supports it
   if (renderer.extensions.has('KHR_parallel_shader_compile')) {
     try { await renderer.compileAsync(scene, camera); } catch (e) { /* compiled on first render instead */ }

@@ -36,7 +36,7 @@ void main(){
 }`;
 
 const FINAL_FS = /* glsl */ `
-uniform sampler2D tScene; uniform sampler2D tRays; uniform float uTime; uniform vec2 uRes; uniform float uExposure; uniform float uFade;
+uniform sampler2D tScene; uniform sampler2D tRays; uniform float uTime; uniform vec2 uRes; uniform float uExposure; uniform float uFade; uniform float uGrain;
 varying vec2 vUv;
 vec3 RRTAndODTFit(vec3 v){ vec3 a = v * (v + 0.0245786) - 0.000090537; vec3 b = v * (0.983729 * v + 0.4329510) + 0.238081; return a / b; }
 vec3 aces(vec3 c){
@@ -68,7 +68,7 @@ void main(){
   col = mix(vec3(l), col, 1.1);
   float vig = 1.0 - 0.42 * pow(clamp(r2 * 1.9, 0.0, 1.0), 1.3);
   col *= vig;
-  col += (hash(uv * uRes + fract(uTime * 7.13)) - 0.5) * 0.018;
+  col += (hash(uv * uRes + fract(uTime * 7.13)) - 0.5) * uGrain;
   col *= uFade;
   gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
 }`;
@@ -88,7 +88,7 @@ export class Pipeline {
       vertexShader: QUAD_VS, fragmentShader: RAYS_FS, depthTest: false, depthWrite: false,
     }));
     this.finalQuad = new FullScreenQuad(new THREE.ShaderMaterial({
-      uniforms: { tScene: { value: null }, tRays: { value: null }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2() }, uExposure: { value: 1.0 }, uFade: { value: 0 } },
+      uniforms: { tScene: { value: null }, tRays: { value: null }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2() }, uExposure: { value: 1.0 }, uFade: { value: 0 }, uGrain: { value: 0.018 } },
       vertexShader: QUAD_VS, fragmentShader: FINAL_FS, depthTest: false, depthWrite: false,
     }));
     this.virtual = new THREE.PerspectiveCamera();
