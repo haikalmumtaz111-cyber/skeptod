@@ -263,7 +263,7 @@ async function main() {
   const minPR = Q.low ? 0.5 : 0.6;
   let pr = forcedPR || Math.min(maxPR, Q.low ? 0.8 : 1.25);
   function resize() {
-    const w = innerWidth, h = innerHeight;
+    const w = canvas.clientWidth || innerWidth, h = canvas.clientHeight || innerHeight;
     renderer.setPixelRatio(pr);
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
