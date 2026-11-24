@@ -1781,8 +1781,12 @@ for (let i = 0; i < 30; i++) { updateShip(1 / 30, simTime + i / 30); }
 simTime += 1; clockTime = simTime;
 prevShipPos.copy(shipState.pos);
 
+const CAPTURE = new URLSearchParams(location.search).has('capture');
 function frame() {
-  const dt = Math.min(clock.getDelta(), 1 / 20);
+  step(Math.min(clock.getDelta(), 1 / 20));
+  requestAnimationFrame(frame);
+}
+function step(dt) {
   simTime += dt; clockTime = simTime;
   const t = simTime;
   prevShipPos.copy(shipState.pos);
@@ -1832,7 +1836,6 @@ function frame() {
   sunViewDir.value.copy(SUN_DIR).transformDirection(camera.matrixWorldInverse);
   composer.render();
   if (!started) { started = true; document.getElementById('veil').style.opacity = '0'; }
-  requestAnimationFrame(frame);
 }
 
 function onResize() {
@@ -1848,5 +1851,10 @@ function onResize() {
 }
 window.addEventListener('resize', onResize);
 onResize();
-requestAnimationFrame(frame);
+if (CAPTURE) {
+  const veil = document.getElementById('veil'); veil.style.transition = 'none'; veil.style.display = 'none';
+  window.__step = (dt) => { step(dt); return simTime; };
+} else {
+  requestAnimationFrame(frame);
+}
 window.__scene = { scene, camera, renderer, shipState };
