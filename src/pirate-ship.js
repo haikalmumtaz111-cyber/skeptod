@@ -8,6 +8,8 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 const V3 = THREE.Vector3;
+const GAME = typeof __GAME__ !== 'undefined' && __GAME__;
+let sailFactor = 1;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -163,6 +165,9 @@ const oceanUniforms = {
   uShipPos: { value: new THREE.Vector2() }, uShipFwd: { value: new THREE.Vector2(0, -1) },
   uSunCol: { value: new V3(SUN_COLOR.r, SUN_COLOR.g, SUN_COLOR.b).multiplyScalar(3.0) },
   uShipSpeed: { value: 7.0 },
+  uTrail: { value: Array.from({ length: 48 }, () => new THREE.Vector4()) },
+  uTrailN: { value: 2 },
+  uSpeedK: { value: 1 },
 };
 const GLSL_OCEAN_COMMON = /* glsl */`
 uniform vec4 uWaves[8];
@@ -185,25 +190,56 @@ float hullDist(vec2 l){
   float dz = max(max(l.y-13.0, -13.3-l.y), 0.0);
   return length(vec2(max(abs(l.x)-hb, 0.0), dz));
 }
-float wakeHeight(vec2 l){
+// wake coordinates: lat = signed lateral offset, sb = distance aft of the bow measured along the sailed path
+uniform vec4 uTrail[48];
+uniform int uTrailN;
+uniform float uSpeedK;
+void wakeFrame(vec2 p, vec2 l, float now, out float lat, out float sb, out vec2 dir, out float k){
+  lat = l.x; sb = l.y + 13.0; dir = -uShipFwd; k = uSpeedK;
+  if(l.y > 13.0){
+    float best = 1e12; float s = 0.0; float age = 0.0;
+    for(int i=0;i<47;i++){
+      if(i >= uTrailN-1) break;
+      vec4 a = uTrail[i]; vec4 b = uTrail[i+1];
+      vec2 ab = b.xy - a.xy;
+      float len2 = max(dot(ab, ab), 1e-4);
+      float h = clamp(dot(p - a.xy, ab)/len2, 0.0, 1.0);
+      vec2 dq = p - (a.xy + ab*h);
+      float d2 = dot(dq, dq);
+      if(d2 < best){
+        best = d2;
+        vec2 t = ab*inversesqrt(len2);
+        float cr = t.x*dq.y - t.y*dq.x;
+        lat = (cr > 0.0 ? -1.0 : 1.0)*sqrt(d2);
+        s = mix(a.z, b.z, h);
+        age = now - mix(a.w, b.w, h);
+        if(len2 > 0.01) dir = t;
+      }
+    }
+    float total = uTrail[uTrailN-1].z;
+    sb = s + 26.0;
+    k = exp(-age/55.0)*mix(uSpeedK, 1.0, smoothstep(0.0, 60.0, s))*(1.0 - smoothstep(total-35.0, total, s));
+  }
+}
+float wakeShape(float lat, float sb){
   float h = 0.0;
-  float sb = l.y + 13.0;
   if(sb > 0.0){
     float arm = 1.3 + sb*0.36;
     float w = 0.9 + sb*0.035;
-    float dx = abs(l.x) - arm;
+    float dx = abs(lat) - arm;
     h += 0.42*exp(-dx*dx/(w*w))*exp(-sb/150.0)*(0.55+0.45*sin(sb*0.6));
-    // diverging wavelets inside the V
-    float inside = smoothstep(arm, arm*0.4, abs(l.x));
-    h += 0.10*inside*sin(sb*0.9 - abs(l.x)*1.4)*exp(-sb/90.0);
-    float ss = l.y - 13.0;
+    float inside = smoothstep(arm, arm*0.4, abs(lat));
+    h += 0.10*inside*sin(sb*0.9 - abs(lat)*1.4)*exp(-sb/90.0);
+    float ss = sb - 26.0;
     if(ss > 0.0){
-      h += 0.16*sin(ss*0.42)*exp(-l.x*l.x/(30.0+ss*1.5))*exp(-ss/80.0)*smoothstep(0.0,6.0,ss);
+      h += 0.16*sin(ss*0.42)*exp(-lat*lat/(30.0+ss*1.5))*exp(-ss/80.0)*smoothstep(0.0,6.0,ss);
     }
   }
-  float hd = hullDist(l);
-  h += 0.55*exp(-pow((l.y+11.5)/3.5, 2.0))*exp(-hd*hd/5.0);
   return h;
+}
+float bowHump(vec2 l){
+  float hd = hullDist(l);
+  return 0.55*exp(-pow((l.y+11.5)/3.5, 2.0))*exp(-hd*hd/5.0);
 }
 `;
 const oceanMat = new THREE.ShaderMaterial({
@@ -228,7 +264,11 @@ const oceanMat = new THREE.ShaderMaterial({
       disp.x += w.x*a*cf; disp.z += w.y*a*cf; disp.y += a*sin(f);
     }
     vec2 l = shipLocal(p);
-    disp.y += wakeHeight(l);
+    if(length(p - uShipPos) < 340.0){
+      float lat; float sb; vec2 wdir; float wk;
+      wakeFrame(p, l, uTime, lat, sb, wdir, wk);
+      disp.y += wakeShape(lat, sb)*wk + bowHump(l)*uSpeedK;
+    }
     wp.xyz += disp;
     vGrid = p; vWorld = wp.xyz;
     gl_Position = projectionMatrix*viewMatrix*wp;
@@ -273,14 +313,19 @@ const oceanMat = new THREE.ShaderMaterial({
     N.xz -= g*dfade;
     // wake normal
     vec2 l = shipLocal(vWorld.xz);
-    if(abs(l.x) < 140.0 && l.y > -40.0 && l.y < 400.0){
+    float lat = l.x; float sb = l.y + 13.0; vec2 tdir = -uShipFwd; float wk = uSpeedK;
+    bool nearShip = length(vWorld.xz - uShipPos) < 340.0;
+    if(nearShip){
+      wakeFrame(vWorld.xz, l, uTime, lat, sb, tdir, wk);
       float e = 0.35;
-      float h0 = wakeHeight(l);
-      float hx = wakeHeight(l+vec2(e,0.0));
-      float hz = wakeHeight(l+vec2(0.0,e));
-      vec2 gl = vec2(hx-h0, hz-h0)/e;
+      float h0 = wakeShape(lat, sb)*wk;
+      float hx = wakeShape(lat + e, sb)*wk;
+      float hs = wakeShape(lat, sb + e)*wk;
+      vec2 rg = vec2(tdir.y, -tdir.x);
+      vec2 gw = rg*(hx - h0)/e + tdir*(hs - h0)/e;
+      float b0 = bowHump(l), bx = bowHump(l + vec2(e, 0.0)), bz = bowHump(l + vec2(0.0, e));
       vec2 rgt = vec2(-uShipFwd.y, uShipFwd.x);
-      vec2 gw = rgt*gl.x - uShipFwd*gl.y;
+      gw += (rgt*(bx - b0)/e - uShipFwd*(bz - b0)/e)*uSpeedK;
       N.xz -= gw;
     }
     N = normalize(N);
@@ -319,23 +364,22 @@ const oceanMat = new THREE.ShaderMaterial({
     // ship foam
     float hd = hullDist(l);
     float contact = exp(-hd/0.75)*(0.45 + 0.6*smoothstep(-2.0, -11.0, l.y));
-    foamAmt += contact*1.25;
-    float sb = l.y + 13.0;
-    if(sb > 0.0){
+    foamAmt += contact*1.25*mix(0.3, 1.0, clamp(uSpeedK, 0.0, 1.0));
+    if(nearShip && sb > 0.0){
       float arm = 1.3 + sb*0.36;
       float w = 0.6 + sb*0.05;
-      float dx = (abs(l.x) - arm)/w;
-      foamAmt += exp(-dx*dx)*exp(-sb/110.0)*0.72;
-      float inside = smoothstep(arm, arm*0.3, abs(l.x));
-      foamAmt += inside*0.18*exp(-sb/70.0);
-    }
-    float ss = l.y - 12.0;
-    if(ss > -3.0){
-      float s0 = max(ss, 0.0);
-      float W = 2.4 + s0*0.075;
-      vec2 rgt = vec2(-uShipFwd.y, uShipFwd.x);
-      float streak = vnoise(vec2(dot(wp, rgt)*0.9, dot(wp, uShipFwd)*0.07));
-      foamAmt += exp(-pow(l.x/W, 2.0))*exp(-s0/200.0)*0.95*smoothstep(-3.0, 1.5, ss)*(0.35+0.75*streak);
+      float dx = (abs(lat) - arm)/w;
+      foamAmt += exp(-dx*dx)*exp(-sb/110.0)*0.72*wk;
+      float inside = smoothstep(arm, arm*0.3, abs(lat));
+      foamAmt += inside*0.18*exp(-sb/70.0)*wk;
+      float ss = sb - 25.0;
+      if(ss > -3.0){
+        float s0 = max(ss, 0.0);
+        float W = 2.4 + s0*0.075;
+        vec2 rg = vec2(tdir.y, -tdir.x);
+        float streak = vnoise(vec2(dot(wp, rg)*0.9, dot(wp, tdir)*0.07));
+        foamAmt += exp(-pow(lat/W, 2.0))*exp(-s0/200.0)*0.95*smoothstep(-3.0, 1.5, ss)*(0.35+0.75*streak)*wk;
+      }
     }
     float nf3 = vnoise(wp*4.3 + vec2(uTime*0.2, -uTime*0.1));
     float pattern = nf*0.55 + nf2*0.3 + nf3*0.15;
@@ -1059,7 +1103,7 @@ class Sail {
       const b = this.base[k], d = this.dir[k], a = this.amt[k];
       const fl = 0.07 * Math.sin(u * 8.0 + v * 5.0 - t * 7.5 + this.phase) * Math.min(1, a * 2.5 + 0.15)
         + 0.04 * Math.sin(u * 15 - v * 9 - t * 11.0 + this.phase);
-      const off = a * breathe + fl * (0.4 + v);
+      const off = a * breathe * (0.3 + 0.7 * sailFactor) + fl * (0.4 + v) * (1.7 - 0.7 * sailFactor);
       pa.setXYZ(k, b.x + d.x * off, b.y + d.y * off, b.z + d.z * off);
     }
     pa.needsUpdate = true;
@@ -1538,6 +1582,20 @@ const islands = [];
     m.position.set(x, -h * 0.05, z);
     m.rotation.y = s;
     scene.add(m);
+    m.updateMatrixWorld(true);
+    const BINS = 72, rad = new Float32Array(BINS);
+    const v = new V3();
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).applyMatrix4(m.matrixWorld);
+      if (v.y < -h * 0.03 || v.y > h * 0.1) continue;
+      const dx = v.x - x, dz = v.z - z;
+      const b = Math.floor(((Math.atan2(dz, dx) / (Math.PI * 2)) + 1) % 1 * BINS) % BINS;
+      rad[b] = Math.max(rad[b], Math.hypot(dx, dz));
+    }
+    let maxR = 0;
+    for (let k = 0; k < BINS; k++) maxR = Math.max(maxR, rad[k]);
+    for (let k = 0; k < BINS; k++) if (rad[k] === 0) rad[k] = Math.max(rad[(k + 1) % BINS], rad[(k + BINS - 1) % BINS], maxR * 0.6);
+    m.userData = { rad, maxR };
     islands.push(m);
   }
 }
@@ -1638,7 +1696,7 @@ controls.maxDistance = 220;
 controls.maxPolarAngle = Math.PI * 0.53;
 controls.minPolarAngle = 0.22;
 controls.enablePan = false;
-controls.enabled = true;
+controls.enabled = !GAME;
 let userActive = false, lastInput = -1e9, blend = 1;
 const blendFrom = { pos: new V3(), tgt: new V3() };
 controls.addEventListener('start', () => { userActive = true; lastInput = clockTime; });
@@ -1662,10 +1720,13 @@ const lookCurve = new THREE.CatmullRomCurve3(SHOTS.map((s) => new V3(...s[1])), 
 const CYCLE = 84;
 
 // ---------------------------------------------------------------- simulation state
-const shipState = { pos: new V3(0, 0, 0), yaw: 0, speed: 7.2, heave: 0, pitch: 0, roll: 0, vHeave: 0, vPitch: 0, vRoll: 0 };
+const shipState = { pos: new V3(0, 0, 0), yaw: 0, speed: 7.2, heave: 0, pitch: 0, roll: 0, vHeave: 0, vPitch: 0, vRoll: 0, yawRate: 0 };
 let clockTime = 0;
 const prevShipPos = new V3();
 const tmpV = new V3(), tmpV2 = new V3();
+const MAX_SPEED = 11;
+const ctrl = { up: false, down: false, left: false, right: false };
+let targetSpeed = 6.5, rudder = 0;
 
 function shipToWorldYaw(local, out) {
   const c = Math.cos(shipState.yaw), s = Math.sin(shipState.yaw);
@@ -1673,17 +1734,61 @@ function shipToWorldYaw(local, out) {
   return out;
 }
 
-function updateShip(dt, t) {
+function autopilot(t) {
   shipState.yaw = 0.035 * Math.sin(t * 0.11) + 0.02 * Math.sin(t * 0.23 + 1.0);
-  const fwd = tmpV.set(-Math.sin(shipState.yaw), 0, -Math.cos(shipState.yaw));
   shipState.speed = 7.2 + 0.5 * Math.sin(t * 0.17);
+  shipState.yawRate = 0;
+}
+
+// player helm: throttle sets the sail plan, rudder turns with inertia
+function steer(dt) {
+  if (ctrl.up) targetSpeed = Math.min(MAX_SPEED, targetSpeed + 3.2 * dt);
+  if (ctrl.down) targetSpeed = Math.max(0, targetSpeed - 3.2 * dt);
+  const rIn = (ctrl.left ? 1 : 0) - (ctrl.right ? 1 : 0);
+  if (rIn) rudder = clamp(rudder + rIn * 1.5 * dt, -1, 1);
+  else rudder -= Math.sign(rudder) * Math.min(Math.abs(rudder), 1.1 * dt);
+  const sp = shipState.speed;
+  shipState.speed += (targetSpeed - sp) * (targetSpeed > sp ? 0.2 : 0.32) * dt;
+  shipState.speed = Math.max(0, shipState.speed * (1 - Math.abs(shipState.yawRate) * 0.22 * dt));
+  const yrT = rudder * 0.13 * clamp(sp / 6, 0.06, 1.3);
+  shipState.yawRate += (yrT - shipState.yawRate) * (1 - Math.exp(-dt / 1.4));
+  shipState.yaw += shipState.yawRate * dt;
+}
+
+function islandRadius(isl, ang) {
+  const r = isl.userData.rad, n = r.length;
+  const b = Math.floor((((ang / (Math.PI * 2)) % 1) + 1) % 1 * n) % n;
+  return r[b];
+}
+function collideIslands() {
+  for (const isl of islands) {
+    const dx = shipState.pos.x - isl.position.x, dz = shipState.pos.z - isl.position.z;
+    const d = Math.hypot(dx, dz);
+    if (d > isl.userData.maxR + 40) continue;
+    const r = islandRadius(isl, Math.atan2(dz, dx)) + 15;
+    if (d < r) {
+      const k = r / Math.max(d, 1e-3);
+      shipState.pos.x = isl.position.x + dx * k; shipState.pos.z = isl.position.z + dz * k;
+      shipState.speed *= 0.85;
+      if (GAME) targetSpeed = Math.min(targetSpeed, 2.5);
+    }
+  }
+}
+
+function updateShip(dt, t) {
+  if (GAME) steer(dt); else autopilot(t);
+  const fwd = tmpV.set(-Math.sin(shipState.yaw), 0, -Math.cos(shipState.yaw));
   shipState.pos.addScaledVector(fwd, shipState.speed * dt);
+  collideIslands();
+  const sf = GAME ? clamp(targetSpeed / (MAX_SPEED * 0.72), 0, 1.15) : 1;
+  sailFactor += (sf - sailFactor) * (1 - Math.exp(-dt * 0.9));
   // sample water
   const sample = (lx, lz) => { shipToWorldYaw(tmpV2.set(lx, 0, lz), tmpV2); return waterHeight(tmpV2.x, tmpV2.z, t); };
   const hb = sample(0, -10.5), hs = sample(0, 10.5), hp = sample(-3.2, 0), hsb = sample(3.2, 0), hc = sample(0, 0);
   const tHeave = (hb + hs + hp + hsb + hc * 2) / 6 + 0.05;
-  const tPitch = Math.atan2(hb - hs, 21) * 0.85;
-  const tRoll = Math.atan2(hsb - hp, 6.4) * 0.55 + 0.045 + 0.015 * Math.sin(t * 0.7);
+  const tPitch = Math.atan2(hb - hs, 21) * 0.85 + 0.006 * shipState.speed * 0.3;
+  const tRoll = Math.atan2(hsb - hp, 6.4) * 0.55 + 0.045 * Math.min(sailFactor, 1) + 0.015 * Math.sin(t * 0.7)
+    - shipState.yawRate * shipState.speed * 0.07;
   const spring = (cur, vel, target, k, d) => { const a = (target - cur) * k - vel * d; vel += a * dt; cur += vel * dt; return [cur, vel]; };
   [shipState.heave, shipState.vHeave] = spring(shipState.heave, shipState.vHeave, tHeave, 14, 5.5);
   [shipState.pitch, shipState.vPitch] = spring(shipState.pitch, shipState.vPitch, tPitch, 10, 4.2);
@@ -1694,6 +1799,54 @@ function updateShip(dt, t) {
   shipTilt.rotation.set(shipState.pitch, 0, shipState.roll);
   oceanUniforms.uShipPos.value.set(shipState.pos.x, shipState.pos.z);
   oceanUniforms.uShipFwd.value.set(fwd.x, fwd.z);
+  oceanUniforms.uSpeedK.value = clamp(shipState.speed / 7.2, 0, 1.4);
+}
+
+// wake trail: stern positions recorded along the sailed path
+const TRAIL_N = 48, TRAIL_STEP = 5;
+const trailHist = [];
+function sternWorld(out) { return shipToWorldYaw(tmpV2.set(0, 0, HALF), out); }
+function initTrail(t) {
+  trailHist.length = 0;
+  const s = sternWorld(new V3());
+  const ax = Math.sin(shipState.yaw), az = Math.cos(shipState.yaw);
+  for (let k = 1; k < TRAIL_N; k++) trailHist.push({ x: s.x + ax * k * TRAIL_STEP, z: s.z + az * k * TRAIL_STEP, t: t - k * TRAIL_STEP / 7.2 });
+}
+function updateTrail(t) {
+  const s = sternWorld(new V3());
+  const h0 = trailHist[0];
+  if (!h0 || Math.hypot(s.x - h0.x, s.z - h0.z) > TRAIL_STEP) {
+    trailHist.unshift({ x: s.x, z: s.z, t });
+    if (trailHist.length > TRAIL_N - 1) trailHist.pop();
+  }
+  const arr = oceanUniforms.uTrail.value;
+  arr[0].set(s.x, s.z, 0, t);
+  let acc = 0, px = s.x, pz = s.z;
+  for (let i = 0; i < trailHist.length; i++) {
+    const q = trailHist[i];
+    acc += Math.hypot(q.x - px, q.z - pz); px = q.x; pz = q.z;
+    arr[i + 1].set(q.x, q.z, acc, q.t);
+  }
+  oceanUniforms.uTrailN.value = trailHist.length + 1;
+}
+
+// islands drift back into view ahead once they fall far behind
+function recycleIslands() {
+  const fx = -Math.sin(shipState.yaw), fz = -Math.cos(shipState.yaw);
+  for (const isl of islands) {
+    const dx = isl.position.x - shipState.pos.x, dz = isl.position.z - shipState.pos.z;
+    if (Math.hypot(dx, dz) < 3400) continue;
+    for (let tries = 0; tries < 30; tries++) {
+      const ang = Math.atan2(fz, fx) + rr(-1.25, 1.25);
+      const dist = rr(1700, 3000);
+      const x = shipState.pos.x + Math.cos(ang) * dist, z = shipState.pos.z + Math.sin(ang) * dist;
+      // keep the scripted course clear when nobody is steering
+      const lateral = Math.abs((x - shipState.pos.x) * -fz + (z - shipState.pos.z) * fx);
+      if (!GAME && lateral < isl.userData.maxR + 160) continue;
+      const ok = islands.every((o) => o === isl || Math.hypot(o.position.x - x, o.position.z - z) > o.userData.maxR + isl.userData.maxR + 250);
+      if (ok) { isl.position.x = x; isl.position.z = z; isl.updateMatrixWorld(); break; }
+    }
+  }
 }
 
 const _e = new V3(), _ev = new V3();
@@ -1701,7 +1854,8 @@ let emitAcc = 0;
 function updateSpray(dt, t) {
   shipTilt.updateMatrixWorld(true);
   const fwd = new V3(-Math.sin(shipState.yaw), 0, -Math.cos(shipState.yaw));
-  const rate = 160 + 900 * clamp(-shipState.vPitch * 6 + (-shipState.vHeave) * 1.5, 0, 1.2);
+  const sk = clamp(shipState.speed / 7.2, 0, 1.4);
+  const rate = (160 + 900 * clamp(-shipState.vPitch * 6 + (-shipState.vHeave) * 1.5, 0, 1.2)) * sk;
   emitAcc += rate * dt;
   while (emitAcc > 1) {
     emitAcc -= 1;
@@ -1715,7 +1869,7 @@ function updateSpray(dt, t) {
     emit(_e, _ev, rr(0.7, 1.5), rr(0.4, 1.1));
   }
   // stern churn mist
-  if (rnd() < dt * 40) {
+  if (rnd() < dt * 40 * sk) {
     _e.set(rr(-2, 2), 0.2, HALF + rr(0, 3)).applyMatrix4(shipTilt.matrixWorld);
     _ev.copy(fwd).multiplyScalar(shipState.speed * 0.3).add(new V3(rr(-1, 1), rr(0.5, 1.5), rr(-1, 1)));
     emit(_e, _ev, rr(0.8, 1.6), rr(0.6, 1.4));
@@ -1770,30 +1924,150 @@ function updateCamera(dt, t) {
   if (!userActive) camera.lookAt(controls.target);
 }
 
+// ---------------------------------------------------------------- chase camera (game)
+const chase = { yawOff: 0, pitch: 0.2, dist: 66, heading: 0, last: -1e9, drag: null };
+let camMode = GAME ? 'chase' : 'cine';
+function updateChaseCam(dt, t) {
+  let dh = shipState.yaw - chase.heading;
+  chase.heading += dh * (1 - Math.exp(-dt * 1.4));
+  if (clockTime - chase.last > 3 && !chase.drag) chase.yawOff *= Math.exp(-dt * 0.7);
+  const a = chase.heading + chase.yawOff, p = chase.pitch;
+  const dir = tmpV.set(Math.sin(a) * Math.cos(p), Math.sin(p), Math.cos(a) * Math.cos(p));
+  const fx = -Math.sin(shipState.yaw), fz = -Math.cos(shipState.yaw);
+  const tgt = new V3(shipState.pos.x + fx * 7, 8.5 + shipState.heave * 0.5, shipState.pos.z + fz * 7);
+  camera.position.copy(tgt).addScaledVector(dir, chase.dist);
+  const wh = waterHeight(camera.position.x, camera.position.z, t);
+  if (camera.position.y < wh + 1.8) camera.position.y = wh + 1.8;
+  controls.target.copy(tgt);
+  camera.lookAt(tgt);
+}
+function switchCam() {
+  if (camMode === 'chase') {
+    camMode = 'cine';
+    blend = 0;
+    blendFrom.pos.copy(camera.position).sub(shipState.pos);
+    blendFrom.tgt.copy(controls.target).sub(shipState.pos);
+  } else {
+    camMode = 'chase';
+    chase.heading = shipState.yaw; chase.yawOff = Math.atan2(camera.position.x - shipState.pos.x, camera.position.z - shipState.pos.z) - shipState.yaw;
+    chase.yawOff = Math.atan2(Math.sin(chase.yawOff), Math.cos(chase.yawOff));
+    chase.last = clockTime;
+  }
+}
+
+// ---------------------------------------------------------------- input + HUD (icons only, no text)
+let hud = null;
+function buildHud() {
+  const css = document.createElement('style');
+  css.textContent = `
+  #hud{position:fixed;inset:0;pointer-events:none;z-index:3;font-size:0;user-select:none;-webkit-user-select:none;}
+  #hud .grp{position:absolute;bottom:calc(22px + env(safe-area-inset-bottom));display:flex;gap:12px;align-items:center;}
+  #hud .left{left:calc(22px + env(safe-area-inset-left));}
+  #hud .right{right:calc(22px + env(safe-area-inset-right));flex-direction:column;gap:10px;}
+  #hud .btn{pointer-events:auto;touch-action:none;width:62px;height:62px;border-radius:50%;
+    background:rgba(24,14,10,0.42);border:1px solid rgba(255,206,150,0.32);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .12s,transform .12s,border-color .12s;}
+  #hud .btn svg{width:28px;height:28px;stroke:#ffdcb0;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+  #hud .btn.on{background:rgba(255,170,90,0.38);border-color:rgba(255,220,170,0.8);transform:scale(0.94);}
+  #hud .meter{position:relative;width:10px;height:96px;border-radius:5px;background:rgba(24,14,10,0.42);border:1px solid rgba(255,206,150,0.32);overflow:hidden;}
+  #hud .fill{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,rgba(255,150,70,0.75),rgba(255,220,160,0.9));}
+  #hud .mark{position:absolute;left:-1px;right:-1px;height:3px;background:#fff;box-shadow:0 0 6px #fff;}
+  #hud .wheel{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));width:84px;height:84px;margin-left:-42px;opacity:.85;}
+  #hud .wheel svg{width:100%;height:100%;stroke:#ffdcb0;fill:none;stroke-linecap:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6));}
+  #hud .cam{pointer-events:auto;position:absolute;top:calc(18px + env(safe-area-inset-top));right:calc(18px + env(safe-area-inset-right));width:46px;height:46px;}
+  #hud .cam svg{width:22px;height:22px;}
+  @media (max-width:600px){ #hud .btn{width:54px;height:54px;} #hud .grp.left{gap:8px;left:calc(14px + env(safe-area-inset-left));} #hud .right{right:calc(14px + env(safe-area-inset-right));} #hud .wheel{width:56px;height:56px;margin-left:-28px;left:58%;} }
+  `;
+  document.head.appendChild(css);
+  const chev = (rot) => `<svg viewBox="0 0 24 24" style="transform:rotate(${rot}deg)"><path d="M15 5 L8 12 L15 19"/></svg>`;
+  let spokes = '';
+  for (let k = 0; k < 8; k++) {
+    const a = k / 8 * Math.PI * 2, c = Math.cos(a), s = Math.sin(a);
+    spokes += `<line x1="${50 + c * 9}" y1="${50 + s * 9}" x2="${50 + c * 46}" y2="${50 + s * 46}" stroke-width="4"/>`;
+    spokes += `<circle cx="${50 + c * 44}" cy="${50 + s * 44}" r="3.2" fill="#ffdcb0" stroke="none"/>`;
+  }
+  const el = document.createElement('div');
+  el.id = 'hud';
+  el.innerHTML = `
+    <div class="grp left"><div class="btn" data-k="left">${chev(0)}</div><div class="btn" data-k="right">${chev(180)}</div></div>
+    <div class="grp right"><div class="btn" data-k="up">${chev(90)}</div><div class="meter"><div class="fill"></div><div class="mark"></div></div><div class="btn" data-k="down">${chev(-90)}</div></div>
+    <div class="wheel"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" stroke-width="5"/><circle cx="50" cy="50" r="8" stroke-width="4"/>${spokes}</svg></div>
+    <div class="btn cam" data-cam="1"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 11 L21 8 L21 16 L16 13"/></svg></div>`;
+  document.body.appendChild(el);
+  el.querySelectorAll('[data-k]').forEach((b) => {
+    const k = b.dataset.k;
+    const on = (e) => { e.preventDefault(); ctrl[k] = true; try { b.setPointerCapture(e.pointerId); } catch (_) { } };
+    const off = () => { ctrl[k] = false; };
+    b.addEventListener('pointerdown', on);
+    b.addEventListener('pointerup', off); b.addEventListener('pointercancel', off); b.addEventListener('lostpointercapture', off);
+    b.addEventListener('contextmenu', (e) => e.preventDefault());
+  });
+  el.querySelector('[data-cam]').addEventListener('click', switchCam);
+  hud = {
+    el, wheel: el.querySelector('.wheel svg'), fill: el.querySelector('.fill'), mark: el.querySelector('.mark'),
+    btns: [...el.querySelectorAll('[data-k]')],
+  };
+}
+function updateHud() {
+  if (!hud) return;
+  hud.wheel.style.transform = `rotate(${(-rudder * 200).toFixed(1)}deg)`;
+  hud.fill.style.height = `${(targetSpeed / MAX_SPEED * 100).toFixed(1)}%`;
+  hud.mark.style.bottom = `${(clamp(shipState.speed / MAX_SPEED, 0, 1) * 100 - 1.5).toFixed(1)}%`;
+  for (const b of hud.btns) b.classList.toggle('on', ctrl[b.dataset.k]);
+}
+if (GAME) {
+  const KEYS = { ArrowUp: 'up', KeyW: 'up', ArrowDown: 'down', KeyS: 'down', ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right' };
+  window.addEventListener('keydown', (e) => {
+    if (KEYS[e.code]) { ctrl[KEYS[e.code]] = true; e.preventDefault(); }
+    else if (e.code === 'KeyC' && !e.repeat) switchCam();
+  });
+  window.addEventListener('keyup', (e) => { if (KEYS[e.code]) ctrl[KEYS[e.code]] = false; });
+  window.addEventListener('blur', () => { for (const k in ctrl) ctrl[k] = false; });
+  const cv = renderer.domElement;
+  cv.addEventListener('pointerdown', (e) => {
+    chase.drag = { x: e.clientX, y: e.clientY, id: e.pointerId }; chase.last = clockTime;
+    try { cv.setPointerCapture(e.pointerId); } catch (_) { }
+    if (camMode === 'cine') switchCam();
+  });
+  cv.addEventListener('pointermove', (e) => {
+    if (!chase.drag || chase.drag.id !== e.pointerId) return;
+    chase.yawOff -= (e.clientX - chase.drag.x) * 0.006;
+    chase.pitch = clamp(chase.pitch + (e.clientY - chase.drag.y) * 0.004, 0.03, 1.2);
+    chase.drag.x = e.clientX; chase.drag.y = e.clientY; chase.last = clockTime;
+  });
+  const end = () => { chase.drag = null; chase.last = clockTime; };
+  cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
+  cv.addEventListener('wheel', (e) => { e.preventDefault(); chase.dist = clamp(chase.dist * Math.exp(e.deltaY * 0.0012), 30, 170); chase.last = clockTime; }, { passive: false });
+}
+
 // ---------------------------------------------------------------- loop
 const clock = new THREE.Clock();
 let started = false;
-const startTime = performance.now();
-const urlT = parseFloat(new URLSearchParams(location.search).get('t') || '0');
+const params = new URLSearchParams(location.search);
+const urlT = parseFloat(params.get('t') || '0');
+const CAPTURE = params.has('capture');
 let simTime = urlT;
+initTrail(simTime);
 // warm up so the scene starts in motion
-for (let i = 0; i < 30; i++) { updateShip(1 / 30, simTime + i / 30); }
+for (let i = 0; i < 30; i++) { updateShip(1 / 30, simTime + i / 30); updateTrail(simTime + i / 30); }
 simTime += 1; clockTime = simTime;
 prevShipPos.copy(shipState.pos);
+chase.heading = shipState.yaw;
+if (GAME && !CAPTURE) buildHud();
 
-const CAPTURE = new URLSearchParams(location.search).has('capture');
 function frame() {
   step(Math.min(clock.getDelta(), 1 / 20));
   requestAnimationFrame(frame);
 }
-function step(dt) {
+function step(dt, render = true) {
   simTime += dt; clockTime = simTime;
   const t = simTime;
   prevShipPos.copy(shipState.pos);
   updateShip(dt, t);
+  updateTrail(t);
   for (const s of sails) s.update(t);
   updateSpray(dt, t);
-  updateCamera(dt, t);
+  if (camMode === 'chase') updateChaseCam(dt, t); else updateCamera(dt, t);
 
   // gulls
   for (const gl of gulls) {
@@ -1810,11 +2084,7 @@ function step(dt) {
     gl.wl.rotation.z = -ang; gl.wr.rotation.z = ang;
   }
 
-  // islands recycle
-  for (const isl of islands) {
-    const rel = isl.position.z - shipState.pos.z;
-    if (rel > 1500) isl.position.z -= 4200;
-  }
+  recycleIslands();
 
   // ocean & sky follow camera
   ocean.position.set(camera.position.x, 0, camera.position.z);
@@ -1826,12 +2096,13 @@ function step(dt) {
   // sun shadow follows ship
   sunLight.target.position.copy(shipState.pos).add(new V3(0, 8, 0));
   sunLight.position.copy(sunLight.target.position).addScaledVector(SUN_DIR, 90);
-  sunViewDir.value.copy(SUN_DIR).transformDirection(camera.matrixWorldInverse);
 
   // lantern flicker
   lanternLights.forEach((l, i) => { l.intensity = 5.5 + Math.sin(t * 13 + i * 2) * 0.6 + Math.sin(t * 29 + i) * 0.4; });
   M.glass.emissiveIntensity = 8.5 + Math.sin(t * 17) * 0.8;
 
+  updateHud();
+  if (!render) return;
   camera.updateMatrixWorld();
   sunViewDir.value.copy(SUN_DIR).transformDirection(camera.matrixWorldInverse);
   composer.render();
@@ -1853,8 +2124,10 @@ window.addEventListener('resize', onResize);
 onResize();
 if (CAPTURE) {
   const veil = document.getElementById('veil'); veil.style.transition = 'none'; veil.style.display = 'none';
-  window.__step = (dt) => { step(dt); return simTime; };
+  window.__step = (dt, render = true) => { step(dt, render); return simTime; };
+  window.__ctrl = ctrl;
+  window.__switchCam = switchCam;
 } else {
   requestAnimationFrame(frame);
 }
-window.__scene = { scene, camera, renderer, shipState };
+window.__scene = { scene, camera, renderer, shipState, chase };
