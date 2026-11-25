@@ -5,5 +5,5 @@
 
 - Drag to orbit, scroll to zoom, right-drag to pan. After ~9 s without input the camera eases back into the cinematic flight.
 - Sound starts on the first click, tap or key press: river, waterfall, wind, rustling sakura and bamboo, birds, frogs, wood creaks and a distant temple bell, all synthesized in code (`village/src/synth.js`) and positioned in 3D around the camera (`village/src/audio.js`). The round button in the bottom-right corner (or the M key) mutes and unmutes.
-- `renders/japanese-village-1080p-lite.mp4` is a 1-minute 1080p render of the cinematic flight with its soundtrack.
+- 1-minute 1080p renders of the cinematic flight (with soundtrack) are written to `renders/` by the capture hook (`?capture`), and are kept out of git because of their size.
 - Source lives in `village/src`. Rebuild with `cd village && npm install && node build.mjs` (writes `../japanese-village.html`).

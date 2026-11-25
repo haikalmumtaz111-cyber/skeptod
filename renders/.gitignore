@@ -1,2 +1,2 @@
-# Full-quality render exceeds GitHub 100 MB file limit
-japanese-village-1080p.mp4
+# Rendered videos are large binaries; they are shared outside the repo
+*.mp4
