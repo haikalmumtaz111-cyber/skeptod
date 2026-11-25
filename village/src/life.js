@@ -429,6 +429,12 @@ class Birds {
     this.b = [];
     for (let i = 0; i < this.N; i++) this.b.push({ off: new V3(rng.range(-12, 12), rng.range(-4, 4), rng.range(-10, 10)), sp: rng.range(0.9, 1.1), s: rng.range(1.1, 1.6) });
   }
+  // world position of bird i at time t (same path as update), used to place crow calls
+  pos(i, t) {
+    const b = this.b[i % this.N], R = 170;
+    const a = t * 0.055 * b.sp + i * 0.004;
+    return [-20 + Math.cos(a) * R + Math.sin(a * 2.0) * 30 + b.off.x, 78 + Math.sin(a * 3 + i) * 5 + b.off.y, -90 + Math.sin(a) * R * 0.6 + b.off.z];
+  }
   update(dt, t) {
     const R = 170;
     for (let i = 0; i < this.N; i++) {
@@ -589,6 +595,7 @@ export function buildLife(T, { foot, smokeSources, hanging }) {
   return {
     group,
     setPR(pr) { dust.material.uniforms.uPR.value = pr; ff.material.uniforms.uPR.value = pr; },
+    birdPos: (i, t) => birds.pos(i, t),
     update(dt, t, cam) {
       petals.update(dt, t, cam);
       ripples.update(dt);

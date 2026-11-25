@@ -12,6 +12,7 @@ import { buildLife } from './life.js';
 import { Pipeline } from './post.js';
 import { box, cyl, M, mul, segMatrix } from './geom.js';
 import { Q } from './quality.js';
+import { Soundscape, renderOffline } from './audio.js';
 
 const tick = () => new Promise((r) => setTimeout(r, 0));
 
@@ -166,6 +167,8 @@ async function main() {
   await tick();
   const life = buildLife(T, { foot: fall.userData.foot, smokeSources, hanging });
   scene.add(life.group);
+  const sound = params.has('capture') ? null : new Soundscape(life, { low: Q.low });
+  if (sound) { sound.mount(); window.__sound = sound; }
 
   // lights
   const sunDir = new THREE.Vector3(...SUN_DIR);
@@ -325,6 +328,7 @@ async function main() {
     }
     camera.updateMatrixWorld();
     window.__mode = mode;
+    if (sound) sound.update(simT, camera);
 
     if (pls.length) pls.forEach((p, i) => { p.intensity = p.userData.base * (0.9 + 0.1 * Math.sin(simT * (9 + i) + i)); });
     mats.shojiLit.emissiveIntensity = 1.9 * U.flicker.value;
@@ -346,7 +350,10 @@ async function main() {
       }
     }
     frameCount++;
-    if (frameCount >= Math.min(maxFrames, 3) && !window.__ready) { window.__ready = true; overlay.style.opacity = '0'; }
+    if (frameCount >= Math.min(maxFrames, 3) && !window.__ready) {
+      window.__ready = true; overlay.style.opacity = '0';
+      if (sound) { setTimeout(() => sound.show(), 1500); setTimeout(() => sound.prepare(), 2500); }
+    }
     if (frameCount === 1 && params.has('stats')) console.log('first frame ms', (performance.now() - now).toFixed(0));
     if (frameCount === 2 && params.has('stats')) console.log('tris', renderer.info.render.triangles, 'calls', renderer.info.render.calls, 'geoms', renderer.info.memory.geometries);
     if (frameCount < maxFrames) requestAnimationFrame(frame);
@@ -388,6 +395,13 @@ async function main() {
       pipe.render(dt, t, fadeV);
       return canvas.toDataURL('image/png');
     };
+    // soundtrack for the same camera path, rendered offline
+    window.__renderAudio = (dur, solo) => renderOffline(life, dur, (t) => {
+      const p = new THREE.Vector3(), tg = new THREE.Vector3();
+      cinePose(t, p, tg);
+      const f = tg.sub(p).normalize(), r = new THREE.Vector3().crossVectors(f, new THREE.Vector3(0, 1, 0)).normalize(), u = new THREE.Vector3().crossVectors(r, f);
+      return { pos: [p.x, p.y, p.z], fwd: [f.x, f.y, f.z], up: [u.x, u.y, u.z] };
+    }, solo || null);
     window.__ready = true;
     return;
   }

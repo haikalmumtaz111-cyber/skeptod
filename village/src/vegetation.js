@@ -425,14 +425,15 @@ function buildPetalCarpet(T, rng) {
 }
 
 // ---------- bamboo groves ----------
+export const BAMBOO_AREAS = [
+  { x0: 42, x1: 98, z0: -96, z1: -36, n: 640 },
+  { x0: -100, x1: -76, z0: -95, z1: -30, n: 330 },
+  { x0: 56, x1: 92, z0: 20, z1: 48, n: 230 },
+];
 function buildBamboo(T, rng) {
   const group = new THREE.Group();
   const culms = [];
-  const areas = [
-    { x0: 42, x1: 98, z0: -96, z1: -36, n: Math.round(640 * (Q.low ? 0.6 : 1)) },
-    { x0: -100, x1: -76, z0: -95, z1: -30, n: Math.round(330 * (Q.low ? 0.6 : 1)) },
-    { x0: 56, x1: 92, z0: 20, z1: 48, n: Math.round(230 * (Q.low ? 0.6 : 1)) },
-  ];
+  const areas = BAMBOO_AREAS.map((A) => ({ ...A, n: Math.round(A.n * (Q.low ? 0.6 : 1)) }));
   for (const A of areas) {
     for (let i = 0; i < A.n; i++) {
       const x = rng.range(A.x0, A.x1), z = rng.range(A.z0, A.z1);
