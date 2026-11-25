@@ -1,0 +1,8 @@
+assets/
+frames/
+__pycache__/
+*.blend
+*.blend1
+*.exr
+render_stdout.log
+output/round*.log
