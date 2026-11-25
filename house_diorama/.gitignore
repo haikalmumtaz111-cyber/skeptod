@@ -4,5 +4,6 @@ __pycache__/
 *.blend
 *.blend1
 *.exr
+render.log
 render_stdout.log
 output/round*.log

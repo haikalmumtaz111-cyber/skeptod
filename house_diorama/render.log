@@ -1,3 +1,0 @@
-2026-11-25 20:59:48 watchdog: launch #1 (1/120 frames on disk)
-2026-11-25 21:00:06 START pid=9605 samples=2048 res=100% | 1/120 frames already on disk, 119 to render
-2026-11-25 21:08:36 frame   1 done in  509.9s | 2/120 | avg 509.9s | ETA 16.71 h
