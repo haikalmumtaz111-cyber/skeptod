@@ -11,7 +11,7 @@ Pipeline headless dari bpy ke PNG sequence lalu ke MP4 jalan sampai selesai. Vid
 Ada dua hal yang belum sesuai brief:
 
 1. **Budget 10 menit terlewati.** Setting paling ringan yang diizinkan brief (960x540, 16 sampel) tetap butuh 827,2 detik untuk merender 120 frame, sekitar 13,8 menit.
-2. **Rotasinya belum linear.** Bug ini baru ketahuan setelah video dikirim. Keyframe-nya keluar sebagai Bezier (ease in/out), jadi Suzanne melambat di awal dan akhir dan loop-nya tersendat di sambungan. Perbaikannya sudah ada di working copy `render_test.py`, tapi videonya belum dirender ulang.
+2. **Rotasinya belum linear.** Bug ini baru ketahuan setelah video dikirim. Keyframe-nya keluar sebagai Bezier (ease in/out), jadi Suzanne melambat di awal dan akhir dan loop-nya tersendat di sambungan. Perbaikannya sudah masuk ke `render_test.py`, tapi videonya belum dirender ulang.
 
 ## Lingkungan
 
@@ -151,7 +151,7 @@ Angka 56,25° di frame 31 cocok dengan kurva ease in/out Bezier. Kalau linear, l
 
 **Kenapa lolos verifikasi.** Semua cek di atas memeriksa file output (durasi, jumlah frame, kecerahan, framing). Tidak ada cek yang membaca kurva animasinya.
 
-**Perbaikan di working copy** (belum di-commit):
+**Perbaikan di `render_test.py`** (sudah di-commit, belum dirender):
 
 - Fungsi `make_linear()` mengeset interpolasi LINEAR langsung di tiap keyframe Suzanne, pivot, dan kamera. F-curve dibaca lewat API Action slotted, dengan fallback ke API lama. Jalur fallback ini belum dites.
 - Fungsi `check_linear()` memastikan rotasi Suzanne tepat 3° per frame. Kalau tidak, script berhenti sebelum render.

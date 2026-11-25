@@ -42,6 +42,34 @@ def make_material(name, base, metallic, roughness):
     return mat
 
 
+def object_fcurves(obj):
+    """F-curves of an object's action on both the legacy and the slotted (4.4+) Action API."""
+    ad = obj.animation_data
+    if ad is None or ad.action is None:
+        return []
+    action = ad.action
+    try:
+        from bpy_extras.anim_utils import action_get_channelbag_for_slot
+        bag = action_get_channelbag_for_slot(action, ad.action_slot)
+        if bag is not None:
+            return list(bag.fcurves)
+    except (ImportError, AttributeError):
+        pass
+    return list(getattr(action, "fcurves", []))
+
+
+def make_linear(obj):
+    # The keyframe_new_interpolation_type preference is NOT honoured by the pip bpy module
+    # (keys came out Bezier), so set it on every key explicitly.
+    curves = object_fcurves(obj)
+    if not curves:
+        raise RuntimeError(f"no f-curves found on {obj.name}")
+    for fc in curves:
+        for kp in fc.keyframe_points:
+            kp.interpolation = "LINEAR"
+        fc.update()
+
+
 def aim(obj, target):
     direction = Vector(target) - obj.location
     obj.rotation_euler = direction.to_track_quat("-Z", "Y").to_euler()
@@ -62,8 +90,6 @@ def add_area_light(name, loc, energy, color, size, target):
 def build_scene():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
-    # Every keyframe created from here on is LINEAR (works on old and new Action APIs).
-    bpy.context.preferences.edit.keyframe_new_interpolation_type = "LINEAR"
 
     target = (0.0, 0.0, 1.0)
 
@@ -80,6 +106,7 @@ def build_scene():
     suz.keyframe_insert("rotation_euler", index=2, frame=1)
     suz.rotation_euler[2] = 2.0 * math.pi
     suz.keyframe_insert("rotation_euler", index=2, frame=121)
+    make_linear(suz)
 
     # Floor: dark, slightly glossy. Large so its edge sits on the horizon instead of mid-frame.
     bpy.ops.mesh.primitive_plane_add(size=400.0, location=(0.0, 0.0, 0.0))
@@ -140,6 +167,8 @@ def build_scene():
     cam.keyframe_insert("location", frame=FRAME_START)
     cam.location = (0.0, -8.5, 2.1)
     cam.keyframe_insert("location", frame=FRAME_END)
+    make_linear(pivot)
+    make_linear(cam)
 
     scene.render.fps = FPS
     scene.render.fps_base = 1.0
@@ -176,6 +205,16 @@ def configure_render(scene, width, height, samples):
 
 
 # ---------------------------------------------------------------- checks
+
+def check_linear(scene, suz):
+    """Suzanne must turn exactly 3 deg per frame (360 deg over 120 frames, frame 121 == frame 1)."""
+    worst = 0.0
+    for f in range(FRAME_START, FRAME_END + 1):
+        scene.frame_set(f)
+        expected = 360.0 * (f - FRAME_START) / 120.0
+        worst = max(worst, abs(math.degrees(suz.rotation_euler[2]) - expected))
+    return worst < 1e-3, worst
+
 
 def framing_report(scene, suz):
     """Project every evaluated Suzanne vertex for every frame; return worst-case margins (0..1 NDC)."""
@@ -262,6 +301,11 @@ def main():
     times_path = os.path.join(out_dir, "frame_times.json")
 
     scene, suz = build_scene()
+
+    linear, err = check_linear(scene, suz)
+    print(f"[anim] Suzanne rotation linear: {linear}  max error {err:.6f} deg")
+    if not linear:
+        sys.exit("[anim] rotation is not linear - loop would not be seamless")
 
     inside, worst = framing_report(scene, suz)
     print(f"[framing] all 120 frames inside view: {inside}  worst NDC: "
