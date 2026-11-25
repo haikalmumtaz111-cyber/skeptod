@@ -1,0 +1,24 @@
+{
+  "name": "skeptod",
+  "version": "1.0.0",
+  "description": "Standalone interactive 3D cyberpunk city (single-file build in index.html)",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haikalmumtaz111-cyber/skeptod.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haikalmumtaz111-cyber/skeptod/issues"
+  },
+  "homepage": "https://github.com/haikalmumtaz111-cyber/skeptod#readme",
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "three": "^0.170.0"
+  },
+  "private": true
+}
