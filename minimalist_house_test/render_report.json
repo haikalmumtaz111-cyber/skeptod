@@ -1,0 +1,33 @@
+{
+  "blender_version": "5.3.0",
+  "engine": "CYCLES",
+  "device": "CPU",
+  "samples": 28,
+  "resolution": "1280x720",
+  "resolution_percentage": 100,
+  "fps": 24,
+  "frames": 120,
+  "objects": 72,
+  "triangles_before_bevel": 40202,
+  "scene_build_s": 0.62,
+  "preview_render_s": 38.63,
+  "animation_render_s": 3784.55,
+  "frames_rendered_this_run": 119,
+  "avg_frame_s": 31.8,
+  "encode_method": "ffmpeg executable (libx264)",
+  "encode_s": 7.0,
+  "video": {
+    "path": "/home/user/skeptod/minimalist_house_test/minimalist_house_test.mp4",
+    "exists": true,
+    "size_bytes": 3152868,
+    "codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "fps": "24/1",
+    "frames": 120,
+    "pix_fmt": "yuv420p",
+    "stream_duration": 5.0,
+    "container_duration": 5.0
+  },
+  "video_ok": true
+}
