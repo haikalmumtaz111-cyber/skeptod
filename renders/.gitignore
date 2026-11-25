@@ -1,0 +1,2 @@
+# Rendered videos are large binaries; they are shared outside the repo
+*.mp4

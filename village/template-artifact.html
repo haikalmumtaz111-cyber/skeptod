@@ -1,0 +1,16 @@
+<title>Sakura Village</title>
+<style>
+/* single dark look: a full-bleed WebGL scene */
+:root{--ground:#000;--dot:#f6c3d3;--glow:rgba(246,160,190,.55);color-scheme:dark;background:var(--ground)}
+html,body{height:100%;margin:0;background:var(--ground);overflow:hidden}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab;outline:none}
+canvas:active{cursor:grabbing}
+#o{position:fixed;inset:0;background:var(--ground);transition:opacity 2.6s ease;pointer-events:none;display:flex;align-items:center;justify-content:center}
+#o i{width:10px;height:10px;border-radius:50%;background:var(--dot);box-shadow:0 0 18px 6px var(--glow);animation:p 1.4s ease-in-out infinite}
+#o.f i{animation:none;opacity:.2;box-shadow:none}
+@keyframes p{50%{transform:scale(1.8);opacity:.4}}
+@media (prefers-reduced-motion:reduce){#o i{animation:none}}
+</style>
+<canvas id="c"></canvas>
+<div id="o"><i></i></div>
+<script>/*__BUNDLE__*/</script>
