@@ -31,7 +31,7 @@ from mathutils import Matrix, Vector  # noqa: E402
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 ASSETS = os.path.join(ROOT, "assets")
-FRAMES = os.path.join(ROOT, "frames")
+FRAMES = os.environ.get("HD_FRAMES", os.path.join(ROOT, "frames"))
 OUT = os.path.join(ROOT, "output")
 
 T0 = time.time()
@@ -1599,7 +1599,7 @@ def build_garden_materials():
     # ---- soil under the lawn blended into the pale gravel under the pebbles
     m = M("ground")
     bed = m.attr("bed")
-    m, a = surf("", "forrest_ground_01", 2.0, (0.045, 0.05, 0.022), rough=0.9, bump=0.8, bdist=0.02, m=m)
+    m, a = surf("", "forrest_ground_01", 2.0, (0.07, 0.082, 0.032), rough=0.9, bump=0.8, bdist=0.02, m=m)
     m, b = surf("", "gravel_floor_02", 1.2, (0.52, 0.50, 0.46), rough=0.75, bump=1.0, bdist=0.02, m=m)
     col = m.mix(bed, a["col"], b["col"])
     r = m.mixf(bed, a["rough"], b["rough"])
@@ -1651,7 +1651,7 @@ def build_garden_materials():
         dm = m.sat(m.add(m.maprange(dry, 0.45, 0.8), m.mul(tipd, m.maprange(dry, 0.0, 0.5, 0.3, 1.0))))
         col = m.mix(dm, col, straw)
         return m, col, dm
-    m, col, dm = blade_mat("grass", [(0.0, (0.040, 0.098, 0.014)), (0.5, (0.068, 0.142, 0.022)), (1.0, (0.118, 0.180, 0.030))],
+    m, col, dm = blade_mat("grass", [(0.0, (0.052, 0.122, 0.017)), (0.5, (0.086, 0.172, 0.026)), (1.0, (0.145, 0.215, 0.036))],
                            [(0.0, (0.30, 0.23, 0.10)), (1.0, (0.44, 0.35, 0.16))], 0.5, 0.36, 0.42)
     vig = m.attr("vig")
     col = tone(m, col, m.maprange(vig, 0.25, 0.75, 1.32, 0.72))
@@ -2662,7 +2662,7 @@ def frame_path(f):
 
 def frame_ok(f):
     p = frame_path(f)
-    return os.path.exists(p) and os.path.getsize(p) > 200_000
+    return os.path.exists(p) and os.path.getsize(p) > int(os.environ.get("HD_MIN_BYTES", 200_000))
 
 
 def render_anim(args):
@@ -2676,7 +2676,9 @@ def render_anim(args):
         print(line, flush=True)
         with open(logf, "a") as fh:
             fh.write(line + "\n")
-    todo = [f for f in range(FRAME_START, FRAME_END + 1) if not frame_ok(f)]
+    # odd frames first, then even: half-way through there is already an evenly spaced 12 fps set on disk
+    order = list(range(FRAME_START, FRAME_END + 1, 2)) + list(range(FRAME_START + 1, FRAME_END + 1, 2))
+    todo = [f for f in order if not frame_ok(f)]
     total = FRAME_END - FRAME_START + 1
     plog(f"START pid={os.getpid()} samples={args.samples} res={args.res}% | {total - len(todo)}/{total} frames "
          f"already on disk, {len(todo)} to render")
