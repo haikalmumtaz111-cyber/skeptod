@@ -1,0 +1,225 @@
+03:05:53 [    0.0s] === mulai; bpy 5.2.5 LTS args {'still': None, 'anim': True, 'encode_only': False, 'start': 1, 'end': 120, 'samples': 1024, 'device': 'GPU', 'scale': 100, 'density': 1.0, 'crop': None, 'out': '/content/job/render', 'assets': '/content/job/assets', 'tag': '', 'save_blend': None, 'threads': 0}
+03:05:53 [    0.1s] aset siap; yang gagal: tidak ada
+03:05:53 [    0.6s] bata: 3365
+03:06:05 [   11.9s] kerikil: 81921
+03:06:15 [   22.5s] pohon di (-4.05, -3.75) cabang: 2397 daun: 151467
+03:06:17 [   24.1s] pohon di (5.0, 3.95) cabang: 551 daun: 33978
+03:06:21 [   28.6s] bilah rumput: 297822
+03:06:22 [   29.6s] kamera: lebar isi 17.27 m, tinggi isi 12.13 m, ortho_scale 32.54
+03:06:23 [   29.7s] GPU: OPTIX ['Tesla T4']
+03:06:23 [   29.7s] device render: GPU
+03:06:23 [   29.7s] scene jadi: 45 objek mesh, 7.27 juta vertex, 9.03 juta face
+03:08:50 [  177.2s] FRAME 1/120 selesai 147.5 dtk (rata-rata 147.5 dtk), sisa 119 frame, perkiraan 292.5 menit
+03:11:12 [  319.6s] FRAME 2/120 selesai 142.4 dtk (rata-rata 144.9 dtk), sisa 118 frame, perkiraan 285.0 menit
+03:13:33 [  460.2s] FRAME 3/120 selesai 140.5 dtk (rata-rata 143.5 dtk), sisa 117 frame, perkiraan 279.8 menit
+03:15:55 [  602.5s] FRAME 4/120 selesai 142.3 dtk (rata-rata 143.2 dtk), sisa 116 frame, perkiraan 276.8 menit
+03:18:17 [  744.2s] FRAME 5/120 selesai 141.7 dtk (rata-rata 142.9 dtk), sisa 115 frame, perkiraan 273.9 menit
+03:20:38 [  885.1s] FRAME 6/120 selesai 140.9 dtk (rata-rata 142.6 dtk), sisa 114 frame, perkiraan 270.8 menit
+03:23:00 [ 1027.0s] FRAME 7/120 selesai 141.9 dtk (rata-rata 142.5 dtk), sisa 113 frame, perkiraan 268.3 menit
+03:25:20 [ 1167.7s] FRAME 8/120 selesai 140.7 dtk (rata-rata 142.2 dtk), sisa 112 frame, perkiraan 265.5 menit
+03:27:40 [ 1306.9s] FRAME 9/120 selesai 139.3 dtk (rata-rata 141.9 dtk), sisa 111 frame, perkiraan 262.5 menit
+03:29:59 [ 1446.0s] FRAME 10/120 selesai 139.1 dtk (rata-rata 141.6 dtk), sisa 110 frame, perkiraan 259.6 menit
+03:32:19 [ 1586.4s] FRAME 11/120 selesai 140.3 dtk (rata-rata 141.5 dtk), sisa 109 frame, perkiraan 257.1 menit
+03:34:39 [ 1725.9s] FRAME 12/120 selesai 139.6 dtk (rata-rata 141.3 dtk), sisa 108 frame, perkiraan 254.4 menit
+03:36:57 [ 1864.4s] FRAME 13/120 selesai 138.5 dtk (rata-rata 141.1 dtk), sisa 107 frame, perkiraan 251.7 menit
+03:39:17 [ 2004.2s] FRAME 14/120 selesai 139.7 dtk (rata-rata 141.0 dtk), sisa 106 frame, perkiraan 249.1 menit
+03:41:38 [ 2144.9s] FRAME 15/120 selesai 140.8 dtk (rata-rata 141.0 dtk), sisa 105 frame, perkiraan 246.8 menit
+03:43:57 [ 2283.8s] FRAME 16/120 selesai 138.8 dtk (rata-rata 140.9 dtk), sisa 104 frame, perkiraan 244.2 menit
+03:46:17 [ 2424.5s] FRAME 17/120 selesai 140.8 dtk (rata-rata 140.9 dtk), sisa 103 frame, perkiraan 241.8 menit
+03:48:40 [ 2567.3s] FRAME 18/120 selesai 142.8 dtk (rata-rata 141.0 dtk), sisa 102 frame, perkiraan 239.7 menit
+03:51:01 [ 2708.1s] FRAME 19/120 selesai 140.8 dtk (rata-rata 141.0 dtk), sisa 101 frame, perkiraan 237.3 menit
+03:53:25 [ 2851.9s] FRAME 20/120 selesai 143.7 dtk (rata-rata 141.1 dtk), sisa 100 frame, perkiraan 235.2 menit
+03:55:48 [ 2995.0s] FRAME 21/120 selesai 143.2 dtk (rata-rata 141.2 dtk), sisa 99 frame, perkiraan 233.0 menit
+03:58:12 [ 3139.2s] FRAME 22/120 selesai 144.1 dtk (rata-rata 141.3 dtk), sisa 98 frame, perkiraan 230.8 menit
+04:00:34 [ 3280.8s] FRAME 23/120 selesai 141.7 dtk (rata-rata 141.3 dtk), sisa 97 frame, perkiraan 228.5 menit
+04:02:58 [ 3425.1s] FRAME 24/120 selesai 144.2 dtk (rata-rata 141.5 dtk), sisa 96 frame, perkiraan 226.4 menit
+04:05:23 [ 3569.9s] FRAME 25/120 selesai 144.8 dtk (rata-rata 141.6 dtk), sisa 95 frame, perkiraan 224.2 menit
+04:07:44 [ 3711.0s] FRAME 26/120 selesai 141.1 dtk (rata-rata 141.6 dtk), sisa 94 frame, perkiraan 221.8 menit
+04:10:06 [ 3852.7s] FRAME 27/120 selesai 141.8 dtk (rata-rata 141.6 dtk), sisa 93 frame, perkiraan 219.5 menit
+04:12:27 [ 3993.9s] FRAME 28/120 selesai 141.2 dtk (rata-rata 141.6 dtk), sisa 92 frame, perkiraan 217.1 menit
+04:14:48 [ 4135.2s] FRAME 29/120 selesai 141.3 dtk (rata-rata 141.6 dtk), sisa 91 frame, perkiraan 214.7 menit
+04:17:13 [ 4280.3s] FRAME 30/120 selesai 145.1 dtk (rata-rata 141.7 dtk), sisa 90 frame, perkiraan 212.5 menit
+04:19:36 [ 4422.7s] FRAME 31/120 selesai 142.4 dtk (rata-rata 141.7 dtk), sisa 89 frame, perkiraan 210.2 menit
+04:21:59 [ 4566.1s] FRAME 32/120 selesai 143.3 dtk (rata-rata 141.8 dtk), sisa 88 frame, perkiraan 207.9 menit
+04:24:21 [ 4707.8s] FRAME 33/120 selesai 141.8 dtk (rata-rata 141.8 dtk), sisa 87 frame, perkiraan 205.5 menit
+04:26:44 [ 4851.1s] FRAME 34/120 selesai 143.2 dtk (rata-rata 141.8 dtk), sisa 86 frame, perkiraan 203.2 menit
+04:29:06 [ 4993.0s] FRAME 35/120 selesai 142.0 dtk (rata-rata 141.8 dtk), sisa 85 frame, perkiraan 200.9 menit
+04:31:29 [ 5136.2s] FRAME 36/120 selesai 143.2 dtk (rata-rata 141.8 dtk), sisa 84 frame, perkiraan 198.6 menit
+04:33:51 [ 5278.6s] FRAME 37/120 selesai 142.4 dtk (rata-rata 141.9 dtk), sisa 83 frame, perkiraan 196.2 menit
+04:36:15 [ 5421.8s] FRAME 38/120 selesai 143.2 dtk (rata-rata 141.9 dtk), sisa 82 frame, perkiraan 193.9 menit
+04:38:37 [ 5564.2s] FRAME 39/120 selesai 142.4 dtk (rata-rata 141.9 dtk), sisa 81 frame, perkiraan 191.6 menit
+04:41:00 [ 5706.9s] FRAME 40/120 selesai 142.7 dtk (rata-rata 141.9 dtk), sisa 80 frame, perkiraan 189.2 menit
+04:43:21 [ 5848.7s] FRAME 41/120 selesai 141.8 dtk (rata-rata 141.9 dtk), sisa 79 frame, perkiraan 186.9 menit
+04:45:45 [ 5991.9s] FRAME 42/120 selesai 143.2 dtk (rata-rata 142.0 dtk), sisa 78 frame, perkiraan 184.5 menit
+04:48:07 [ 6133.8s] FRAME 43/120 selesai 141.9 dtk (rata-rata 142.0 dtk), sisa 77 frame, perkiraan 182.2 menit
+04:50:28 [ 6275.1s] FRAME 44/120 selesai 141.3 dtk (rata-rata 141.9 dtk), sisa 76 frame, perkiraan 179.8 menit
+04:52:50 [ 6416.8s] FRAME 45/120 selesai 141.7 dtk (rata-rata 141.9 dtk), sisa 75 frame, perkiraan 177.4 menit
+04:55:10 [ 6557.3s] FRAME 46/120 selesai 140.6 dtk (rata-rata 141.9 dtk), sisa 74 frame, perkiraan 175.0 menit
+04:57:32 [ 6699.6s] FRAME 47/120 selesai 142.3 dtk (rata-rata 141.9 dtk), sisa 73 frame, perkiraan 172.7 menit
+04:59:53 [ 6840.3s] FRAME 48/120 selesai 140.7 dtk (rata-rata 141.9 dtk), sisa 72 frame, perkiraan 170.3 menit
+05:02:17 [ 6984.0s] FRAME 49/120 selesai 143.7 dtk (rata-rata 141.9 dtk), sisa 71 frame, perkiraan 167.9 menit
+05:04:37 [ 7123.8s] FRAME 50/120 selesai 139.8 dtk (rata-rata 141.9 dtk), sisa 70 frame, perkiraan 165.5 menit
+05:06:59 [ 7265.9s] FRAME 51/120 selesai 142.1 dtk (rata-rata 141.9 dtk), sisa 69 frame, perkiraan 163.2 menit
+05:09:20 [ 7407.3s] FRAME 52/120 selesai 141.3 dtk (rata-rata 141.9 dtk), sisa 68 frame, perkiraan 160.8 menit
+05:11:42 [ 7549.3s] FRAME 53/120 selesai 142.1 dtk (rata-rata 141.9 dtk), sisa 67 frame, perkiraan 158.4 menit
+05:14:03 [ 7690.1s] FRAME 54/120 selesai 140.8 dtk (rata-rata 141.9 dtk), sisa 66 frame, perkiraan 156.0 menit
+05:16:25 [ 7832.7s] FRAME 55/120 selesai 142.6 dtk (rata-rata 141.9 dtk), sisa 65 frame, perkiraan 153.7 menit
+05:18:47 [ 7974.3s] FRAME 56/120 selesai 141.6 dtk (rata-rata 141.9 dtk), sisa 64 frame, perkiraan 151.3 menit
+05:21:10 [ 8117.0s] FRAME 57/120 selesai 142.7 dtk (rata-rata 141.9 dtk), sisa 63 frame, perkiraan 149.0 menit
+05:23:31 [ 8258.5s] FRAME 58/120 selesai 141.4 dtk (rata-rata 141.9 dtk), sisa 62 frame, perkiraan 146.6 menit
+05:25:53 [ 8400.5s] FRAME 59/120 selesai 142.0 dtk (rata-rata 141.9 dtk), sisa 61 frame, perkiraan 144.2 menit
+05:28:16 [ 8542.9s] FRAME 60/120 selesai 142.4 dtk (rata-rata 141.9 dtk), sisa 60 frame, perkiraan 141.9 menit
+05:30:38 [ 8685.5s] FRAME 61/120 selesai 142.6 dtk (rata-rata 141.9 dtk), sisa 59 frame, perkiraan 139.5 menit
+05:33:01 [ 8828.7s] FRAME 62/120 selesai 143.2 dtk (rata-rata 141.9 dtk), sisa 58 frame, perkiraan 137.2 menit
+05:35:24 [ 8971.7s] FRAME 63/120 selesai 143.0 dtk (rata-rata 141.9 dtk), sisa 57 frame, perkiraan 134.8 menit
+05:37:51 [ 9118.7s] FRAME 64/120 selesai 147.0 dtk (rata-rata 142.0 dtk), sisa 56 frame, perkiraan 132.5 menit
+05:40:16 [ 9263.3s] FRAME 65/120 selesai 144.6 dtk (rata-rata 142.1 dtk), sisa 55 frame, perkiraan 130.2 menit
+05:42:43 [ 9410.2s] FRAME 66/120 selesai 146.9 dtk (rata-rata 142.1 dtk), sisa 54 frame, perkiraan 127.9 menit
+05:45:05 [ 9552.3s] FRAME 67/120 selesai 142.0 dtk (rata-rata 142.1 dtk), sisa 53 frame, perkiraan 125.5 menit
+05:47:29 [ 9695.9s] FRAME 68/120 selesai 143.6 dtk (rata-rata 142.1 dtk), sisa 52 frame, perkiraan 123.2 menit
+05:49:51 [ 9837.7s] FRAME 69/120 selesai 141.9 dtk (rata-rata 142.1 dtk), sisa 51 frame, perkiraan 120.8 menit
+05:52:14 [ 9980.8s] FRAME 70/120 selesai 143.1 dtk (rata-rata 142.2 dtk), sisa 50 frame, perkiraan 118.5 menit
+05:54:35 [10122.7s] FRAME 71/120 selesai 141.9 dtk (rata-rata 142.2 dtk), sisa 49 frame, perkiraan 116.1 menit
+05:56:59 [10266.0s] FRAME 72/120 selesai 143.3 dtk (rata-rata 142.2 dtk), sisa 48 frame, perkiraan 113.7 menit
+05:59:22 [10408.9s] FRAME 73/120 selesai 143.0 dtk (rata-rata 142.2 dtk), sisa 47 frame, perkiraan 111.4 menit
+06:01:44 [10551.7s] FRAME 74/120 selesai 142.8 dtk (rata-rata 142.2 dtk), sisa 46 frame, perkiraan 109.0 menit
+06:04:10 [10697.4s] FRAME 75/120 selesai 145.7 dtk (rata-rata 142.2 dtk), sisa 45 frame, perkiraan 106.7 menit
+06:06:33 [10840.3s] FRAME 76/120 selesai 142.9 dtk (rata-rata 142.2 dtk), sisa 44 frame, perkiraan 104.3 menit
+06:08:57 [10984.4s] FRAME 77/120 selesai 144.1 dtk (rata-rata 142.3 dtk), sisa 43 frame, perkiraan 102.0 menit
+06:11:20 [11127.6s] FRAME 78/120 selesai 143.2 dtk (rata-rata 142.3 dtk), sisa 42 frame, perkiraan 99.6 menit
+06:13:43 [11270.6s] FRAME 79/120 selesai 142.9 dtk (rata-rata 142.3 dtk), sisa 41 frame, perkiraan 97.2 menit
+06:16:08 [11415.7s] FRAME 80/120 selesai 145.1 dtk (rata-rata 142.3 dtk), sisa 40 frame, perkiraan 94.9 menit
+06:18:32 [11558.8s] FRAME 81/120 selesai 143.1 dtk (rata-rata 142.3 dtk), sisa 39 frame, perkiraan 92.5 menit
+06:20:56 [11702.9s] FRAME 82/120 selesai 144.1 dtk (rata-rata 142.4 dtk), sisa 38 frame, perkiraan 90.2 menit
+06:23:19 [11846.1s] FRAME 83/120 selesai 143.2 dtk (rata-rata 142.4 dtk), sisa 37 frame, perkiraan 87.8 menit
+06:25:41 [11988.4s] FRAME 84/120 selesai 142.3 dtk (rata-rata 142.4 dtk), sisa 36 frame, perkiraan 85.4 menit
+06:28:05 [12132.3s] FRAME 85/120 selesai 143.9 dtk (rata-rata 142.4 dtk), sisa 35 frame, perkiraan 83.1 menit
+06:30:27 [12274.0s] FRAME 86/120 selesai 141.6 dtk (rata-rata 142.4 dtk), sisa 34 frame, perkiraan 80.7 menit
+06:32:51 [12418.5s] FRAME 87/120 selesai 144.5 dtk (rata-rata 142.4 dtk), sisa 33 frame, perkiraan 78.3 menit
+06:35:14 [12561.5s] FRAME 88/120 selesai 143.0 dtk (rata-rata 142.4 dtk), sisa 32 frame, perkiraan 75.9 menit
+06:37:39 [12706.3s] FRAME 89/120 selesai 144.9 dtk (rata-rata 142.4 dtk), sisa 31 frame, perkiraan 73.6 menit
+06:40:06 [12852.8s] FRAME 90/120 selesai 146.4 dtk (rata-rata 142.5 dtk), sisa 30 frame, perkiraan 71.2 menit
+06:42:29 [12996.1s] FRAME 91/120 selesai 143.3 dtk (rata-rata 142.5 dtk), sisa 29 frame, perkiraan 68.9 menit
+06:44:54 [13141.6s] FRAME 92/120 selesai 145.5 dtk (rata-rata 142.5 dtk), sisa 28 frame, perkiraan 66.5 menit
+06:47:18 [13284.7s] FRAME 93/120 selesai 143.2 dtk (rata-rata 142.5 dtk), sisa 27 frame, perkiraan 64.1 menit
+06:49:42 [13429.4s] FRAME 94/120 selesai 144.7 dtk (rata-rata 142.5 dtk), sisa 26 frame, perkiraan 61.8 menit
+06:52:06 [13573.0s] FRAME 95/120 selesai 143.6 dtk (rata-rata 142.6 dtk), sisa 25 frame, perkiraan 59.4 menit
+06:54:29 [13716.3s] FRAME 96/120 selesai 143.3 dtk (rata-rata 142.6 dtk), sisa 24 frame, perkiraan 57.0 menit
+06:56:53 [13860.4s] FRAME 97/120 selesai 144.1 dtk (rata-rata 142.6 dtk), sisa 23 frame, perkiraan 54.7 menit
+06:59:17 [14004.0s] FRAME 98/120 selesai 143.6 dtk (rata-rata 142.6 dtk), sisa 22 frame, perkiraan 52.3 menit
+07:01:43 [14150.7s] FRAME 99/120 selesai 146.7 dtk (rata-rata 142.6 dtk), sisa 21 frame, perkiraan 49.9 menit
+07:04:07 [14294.4s] FRAME 100/120 selesai 143.7 dtk (rata-rata 142.6 dtk), sisa 20 frame, perkiraan 47.5 menit
+07:06:32 [14439.1s] FRAME 101/120 selesai 144.7 dtk (rata-rata 142.7 dtk), sisa 19 frame, perkiraan 45.2 menit
+07:08:57 [14583.8s] FRAME 102/120 selesai 144.7 dtk (rata-rata 142.7 dtk), sisa 18 frame, perkiraan 42.8 menit
+07:11:19 [14726.4s] FRAME 103/120 selesai 142.6 dtk (rata-rata 142.7 dtk), sisa 17 frame, perkiraan 40.4 menit
+07:13:43 [14870.3s] FRAME 104/120 selesai 143.9 dtk (rata-rata 142.7 dtk), sisa 16 frame, perkiraan 38.1 menit
+07:16:05 [15012.6s] FRAME 105/120 selesai 142.3 dtk (rata-rata 142.7 dtk), sisa 15 frame, perkiraan 35.7 menit
+07:18:28 [15155.2s] FRAME 106/120 selesai 142.7 dtk (rata-rata 142.7 dtk), sisa 14 frame, perkiraan 33.3 menit
+07:20:50 [15296.9s] FRAME 107/120 selesai 141.7 dtk (rata-rata 142.7 dtk), sisa 13 frame, perkiraan 30.9 menit
+08:19:28 [    0.1s] === mulai; bpy 5.2.5 LTS args {'still': None, 'anim': True, 'encode_only': False, 'start': 108, 'end': 120, 'samples': 1024, 'device': 'CPU', 'scale': 100, 'density': 1.0, 'crop': None, 'out': '/home/user/skeptod/render', 'assets': '/home/user/skeptod/assets', 'tag': '', 'save_blend': None, 'threads': 0, 'reverse': True}
+08:19:28 [    0.1s] aset siap; yang gagal: tidak ada
+08:19:29 [    0.7s] bata: 3365
+08:19:36 [    7.8s] kerikil: 81921
+08:19:41 [   13.1s] pohon di (-4.05, -3.75) cabang: 2397 daun: 151467
+08:19:42 [   14.2s] pohon di (5.0, 3.95) cabang: 551 daun: 33978
+08:19:46 [   17.8s] bilah rumput: 297822
+08:19:46 [   18.3s] kamera: lebar isi 17.27 m, tinggi isi 12.13 m, ortho_scale 32.54
+08:19:46 [   18.3s] device render: CPU
+08:19:46 [   18.3s] scene jadi: 45 objek mesh, 7.27 juta vertex, 9.03 juta face
+08:49:02 [    0.2s] === mulai; bpy 5.2.5 LTS args {'still': None, 'anim': True, 'encode_only': False, 'start': 108, 'end': 120, 'samples': 1024, 'device': 'CPU', 'scale': 100, 'density': 1.0, 'crop': None, 'out': '/home/user/skeptod/render', 'assets': '/home/user/skeptod/assets', 'tag': '', 'save_blend': None, 'threads': 0, 'reverse': True, 'budget': 6900.0, 'frame_guess': 2700}
+08:49:02 [    0.5s] aset siap; yang gagal: tidak ada
+08:49:04 [    2.9s] bata: 3365
+08:49:12 [   10.3s] kerikil: 81921
+08:49:18 [   16.0s] pohon di (-4.05, -3.75) cabang: 2397 daun: 151467
+08:49:19 [   17.2s] pohon di (5.0, 3.95) cabang: 551 daun: 33978
+08:49:22 [   20.9s] bilah rumput: 297822
+08:49:23 [   21.6s] kamera: lebar isi 17.27 m, tinggi isi 12.13 m, ortho_scale 32.54
+08:49:23 [   21.6s] device render: CPU
+08:49:23 [   21.7s] scene jadi: 45 objek mesh, 7.27 juta vertex, 9.03 juta face
+09:33:06 [ 2644.8s] FRAME 120/120 selesai 2623.1 dtk (rata-rata 2623.1 dtk), sisa 12 frame, perkiraan 524.6 menit
+10:14:29 [ 5127.5s] FRAME 119/120 selesai 2482.7 dtk (rata-rata 2552.9 dtk), sisa 11 frame, perkiraan 468.0 menit
+10:14:29 [ 5127.5s] BUDGET waktu habis sebelum frame 118, berhenti rapi
+10:14:29 [ 5127.5s] ANIMASI SELESAI
+10:15:57 [    0.0s] === mulai; bpy 5.2.5 LTS args {'still': None, 'anim': True, 'encode_only': False, 'start': 108, 'end': 118, 'samples': 1024, 'device': 'CPU', 'scale': 100, 'density': 1.0, 'crop': None, 'out': '/home/user/skeptod/render', 'assets': '/home/user/skeptod/assets', 'tag': '', 'save_blend': None, 'threads': 0, 'reverse': True, 'budget': 7000.0, 'frame_guess': 2560.0}
+10:15:57 [    0.1s] aset siap; yang gagal: tidak ada
+10:15:58 [    0.5s] bata: 3365
+10:16:06 [    8.4s] kerikil: 81921
+10:16:11 [   14.0s] pohon di (-4.05, -3.75) cabang: 2397 daun: 151467
+10:16:12 [   15.1s] pohon di (5.0, 3.95) cabang: 551 daun: 33978
+10:16:16 [   19.0s] bilah rumput: 297822
+10:16:17 [   19.5s] kamera: lebar isi 17.27 m, tinggi isi 12.13 m, ortho_scale 32.54
+10:16:17 [   19.5s] device render: CPU
+10:16:17 [   19.5s] scene jadi: 45 objek mesh, 7.27 juta vertex, 9.03 juta face
+10:58:26 [ 2548.6s] FRAME 118/118 selesai 2529.0 dtk (rata-rata 2529.0 dtk), sisa 10 frame, perkiraan 421.5 menit
+11:40:19 [ 5062.2s] FRAME 117/118 selesai 2513.6 dtk (rata-rata 2521.3 dtk), sisa 9 frame, perkiraan 378.2 menit
+11:40:19 [ 5062.2s] BUDGET waktu habis sebelum frame 116, berhenti rapi
+11:40:19 [ 5062.2s] ANIMASI SELESAI
+11:41:43 [    0.0s] === mulai; bpy 5.2.5 LTS args {'still': None, 'anim': True, 'encode_only': False, 'start': 108, 'end': 116, 'samples': 1024, 'device': 'CPU', 'scale': 100, 'density': 1.0, 'crop': None, 'out': '/home/user/skeptod/render', 'assets': '/home/user/skeptod/assets', 'tag': '', 'save_blend': None, 'threads': 0, 'reverse': True, 'budget': 7000.0, 'frame_guess': 2560.0}
+11:41:43 [    0.1s] aset siap; yang gagal: tidak ada
+11:41:43 [    0.5s] bata: 3365
+11:41:51 [    8.1s] kerikil: 81921
+11:41:56 [   13.5s] pohon di (-4.05, -3.75) cabang: 2397 daun: 151467
+11:41:58 [   14.7s] pohon di (5.0, 3.95) cabang: 551 daun: 33978
+11:42:01 [   18.4s] bilah rumput: 297822
+11:42:02 [   18.9s] kamera: lebar isi 17.27 m, tinggi isi 12.13 m, ortho_scale 32.54
+11:42:02 [   18.9s] device render: CPU
+11:42:02 [   18.9s] scene jadi: 45 objek mesh, 7.27 juta vertex, 9.03 juta face
+12:24:04 [ 2541.1s] FRAME 116/116 selesai 2522.1 dtk (rata-rata 2522.1 dtk), sisa 8 frame, perkiraan 336.3 menit
+13:06:31 [ 5088.3s] FRAME 115/116 selesai 2547.2 dtk (rata-rata 2534.7 dtk), sisa 7 frame, perkiraan 295.7 menit
+13:06:31 [ 5088.3s] BUDGET waktu habis sebelum frame 114, berhenti rapi
+13:06:31 [ 5088.3s] ANIMASI SELESAI
+13:06:45 [    0.0s] === mulai; bpy 5.2.5 LTS args {'still': None, 'anim': True, 'encode_only': False, 'start': 108, 'end': 114, 'samples': 1024, 'device': 'CPU', 'scale': 100, 'density': 1.0, 'crop': None, 'out': '/home/user/skeptod/render', 'assets': '/home/user/skeptod/assets', 'tag': '', 'save_blend': None, 'threads': 0, 'reverse': True, 'budget': 7000.0, 'frame_guess': 2560.0}
+13:06:45 [    0.1s] aset siap; yang gagal: tidak ada
+13:06:46 [    0.6s] bata: 3365
+13:06:53 [    8.2s] kerikil: 81921
+13:06:59 [   14.1s] pohon di (-4.05, -3.75) cabang: 2397 daun: 151467
+13:07:00 [   15.2s] pohon di (5.0, 3.95) cabang: 551 daun: 33978
+13:07:04 [   18.8s] bilah rumput: 297822
+13:07:04 [   19.3s] kamera: lebar isi 17.27 m, tinggi isi 12.13 m, ortho_scale 32.54
+13:07:04 [   19.3s] device render: CPU
+13:07:04 [   19.3s] scene jadi: 45 objek mesh, 7.27 juta vertex, 9.03 juta face
+13:50:23 [ 2617.5s] FRAME 114/114 selesai 2598.2 dtk (rata-rata 2598.2 dtk), sisa 6 frame, perkiraan 259.8 menit
+14:32:50 [ 5165.4s] FRAME 113/114 selesai 2547.9 dtk (rata-rata 2573.0 dtk), sisa 5 frame, perkiraan 214.4 menit
+14:32:50 [ 5165.4s] BUDGET waktu habis sebelum frame 112, berhenti rapi
+14:32:50 [ 5165.4s] ANIMASI SELESAI
+14:34:13 [    0.0s] === mulai; bpy 5.2.5 LTS args {'still': None, 'anim': True, 'encode_only': False, 'start': 108, 'end': 112, 'samples': 1024, 'device': 'CPU', 'scale': 100, 'density': 1.0, 'crop': None, 'out': '/home/user/skeptod/render', 'assets': '/home/user/skeptod/assets', 'tag': '', 'save_blend': None, 'threads': 0, 'reverse': True, 'budget': 7000.0, 'frame_guess': 2560.0}
+14:34:13 [    0.1s] aset siap; yang gagal: tidak ada
+14:34:14 [    0.5s] bata: 3365
+14:34:22 [    8.3s] kerikil: 81921
+14:34:27 [   13.8s] pohon di (-4.05, -3.75) cabang: 2397 daun: 151467
+14:34:28 [   14.9s] pohon di (5.0, 3.95) cabang: 551 daun: 33978
+14:34:32 [   18.7s] bilah rumput: 297822
+14:34:32 [   19.1s] kamera: lebar isi 17.27 m, tinggi isi 12.13 m, ortho_scale 32.54
+14:34:32 [   19.1s] device render: CPU
+14:34:32 [   19.1s] scene jadi: 45 objek mesh, 7.27 juta vertex, 9.03 juta face
+15:16:31 [ 2537.6s] FRAME 112/112 selesai 2518.4 dtk (rata-rata 2518.4 dtk), sisa 4 frame, perkiraan 167.9 menit
+15:58:23 [ 5049.8s] FRAME 111/112 selesai 2512.2 dtk (rata-rata 2515.3 dtk), sisa 3 frame, perkiraan 125.8 menit
+15:58:23 [ 5049.8s] BUDGET waktu habis sebelum frame 110, berhenti rapi
+15:58:23 [ 5049.8s] ANIMASI SELESAI
+15:58:33 [    0.0s] === mulai; bpy 5.2.5 LTS args {'still': None, 'anim': True, 'encode_only': False, 'start': 108, 'end': 110, 'samples': 1024, 'device': 'CPU', 'scale': 100, 'density': 1.0, 'crop': None, 'out': '/home/user/skeptod/render', 'assets': '/home/user/skeptod/assets', 'tag': '', 'save_blend': None, 'threads': 0, 'reverse': True, 'budget': 7000.0, 'frame_guess': 2560.0}
+15:58:33 [    0.1s] aset siap; yang gagal: tidak ada
+15:58:34 [    0.5s] bata: 3365
+15:58:41 [    7.4s] kerikil: 81921
+15:58:46 [   13.1s] pohon di (-4.05, -3.75) cabang: 2397 daun: 151467
+15:58:47 [   14.1s] pohon di (5.0, 3.95) cabang: 551 daun: 33978
+15:58:51 [   17.8s] bilah rumput: 297822
+15:58:51 [   18.2s] kamera: lebar isi 17.27 m, tinggi isi 12.13 m, ortho_scale 32.54
+15:58:51 [   18.2s] device render: CPU
+15:58:51 [   18.2s] scene jadi: 45 objek mesh, 7.27 juta vertex, 9.03 juta face
+16:40:04 [ 2490.4s] FRAME 110/110 selesai 2472.1 dtk (rata-rata 2472.1 dtk), sisa 2 frame, perkiraan 82.4 menit
+17:20:52 [ 4938.7s] FRAME 109/110 selesai 2448.3 dtk (rata-rata 2460.2 dtk), sisa 1 frame, perkiraan 41.0 menit
+17:20:52 [ 4938.7s] BUDGET waktu habis sebelum frame 108, berhenti rapi
+17:20:52 [ 4938.7s] ANIMASI SELESAI
+17:21:00 [    0.0s] === mulai; bpy 5.2.5 LTS args {'still': None, 'anim': True, 'encode_only': False, 'start': 108, 'end': 108, 'samples': 1024, 'device': 'CPU', 'scale': 100, 'density': 1.0, 'crop': None, 'out': '/home/user/skeptod/render', 'assets': '/home/user/skeptod/assets', 'tag': '', 'save_blend': None, 'threads': 0, 'reverse': False, 'budget': 7000.0, 'frame_guess': 2560.0}
+17:21:00 [    0.1s] aset siap; yang gagal: tidak ada
+17:21:00 [    0.5s] bata: 3365
+17:21:07 [    7.6s] kerikil: 81921
+17:21:13 [   13.3s] pohon di (-4.05, -3.75) cabang: 2397 daun: 151467
+17:21:14 [   14.3s] pohon di (5.0, 3.95) cabang: 551 daun: 33978
+17:21:18 [   18.0s] bilah rumput: 297822
+17:21:18 [   18.6s] kamera: lebar isi 17.27 m, tinggi isi 12.13 m, ortho_scale 32.54
+17:21:18 [   18.6s] device render: CPU
+17:21:18 [   18.6s] scene jadi: 45 objek mesh, 7.27 juta vertex, 9.03 juta face
+18:02:53 [ 2513.1s] FRAME 108/108 selesai 2494.5 dtk (rata-rata 2494.5 dtk), sisa 0 frame, perkiraan 0.0 menit
+18:03:07 [ 2527.5s] encode OK /home/user/skeptod/render/house_diorama.mp4
+18:03:07 [ 2527.5s] ANIMASI SELESAI
