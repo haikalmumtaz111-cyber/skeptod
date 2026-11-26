@@ -12,12 +12,13 @@ MD_INTRO = """# Warung tenda diorama: render final di Colab (GPU T4)
 Notebook ini merender 120 frame (1080x1920, 24 fps, Cycles 512 sample) lalu menggabungnya jadi MP4.
 Semua frame, log dan cache simulasi disimpan di Google Drive, folder `MyDrive/warung_diorama`.
 Kalau sesi Colab mati di tengah jalan, buka lagi notebook ini lalu **Run all**: frame yang sudah ada dilewati.
+Jalan pertama lebih lama karena simulasi uap dibake dulu di CPU Colab (sekali saja, hasilnya disimpan di Drive).
 
 **Langkah**
 1. `Runtime > Change runtime type > T4 GPU > Save`.
 2. `Runtime > Run all`, lalu izinkan akses Google Drive waktu diminta.
 3. Tunggu cell 6 mencetak device yang terpakai, waktu frame pertama dan ETA 120 frame.
-4. Biarkan cell 7 jalan sampai 120 frame. Kalau sesi putus, ulangi langkah 1 dan 2.
+4. Biarkan cell 7 jalan sampai 120 frame dan jangan tutup tab-nya. Kalau sesi putus, ulangi langkah 1 dan 2.
 5. Cell 8 membuat `warung_diorama.mp4`, menampilkannya, menyimpannya ke Drive dan mengunduhnya ke komputer.
 """
 

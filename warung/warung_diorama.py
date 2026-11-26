@@ -835,7 +835,7 @@ def m_asphalt():
     deep = nb.mr(H, L - 0.16, L, 1.0, 0.0)
     damp = nb.mul(nb.mr(H, L, L + 0.26, 1.0, 0.45, smooth=True), nb.mr(sh, 0, 1, 1.0, 0.3))
     # warna: variasi besar, tambalan, garis cat pudar
-    base = nb.mix(nb.mr(nb.noise(P, 0.9, 4.0), 0.3, 0.7, 0.0, 1.0), nb.hsv(t['col'], v=0.5), nb.hsv(t['col'], v=0.72))
+    base = nb.mix(nb.mr(nb.noise(P, 0.9, 4.0), 0.3, 0.7, 0.0, 1.0), nb.hsv(t['col'], v=0.36), nb.hsv(t['col'], v=0.52))
     patch = nb.mul(band(nb, x, -3.3, -1.9, 0.02), band(nb, y, -3.4, -2.3, 0.02))
     base = nb.mix(nb.mul(patch, 0.55), base, (0.02, 0.02, 0.022))
     wear = nb.mr(nb.add(nb.noise(P, 5.0, 5.0, 0.7), nb.mul(t['h'], 0.6)), 0.72, 0.88, 0.0, 1.0)
@@ -845,7 +845,7 @@ def m_asphalt():
     col = nb.mix(damp, base, wetc)
     col = nb.mix(nb.mul(pud, nb.mr(deep, 0, 1, 0.3, 0.8)), col, (0.016, 0.014, 0.011))
     rough = nb.lerp(damp, t['rough'], nb.add(nb.mul(t['rough'], 0.62), 0.12))
-    rough = nb.lerp(pud, rough, 0.35)
+    rough = nb.lerp(pud, rough, 0.95)
     hb = nb.mul(t['h'], nb.mr(pud, 0, 1, 1.0, 0.12))
     nrm = nb.bump(hb, 1.0, 0.014)
     # riak hujan + kerut angin di genangan (tidak di bawah tenda)
@@ -855,10 +855,11 @@ def m_asphalt():
     wv = nb.noise(nb.vmath('ADD', P, nb.comb(nb.mul(nb.time(), 0.06), nb.mul(nb.time(), 0.03), 0.0)), 16.0, 2.0)
     cn = nb.bump(nb.mul(hb, nb.inv(pud)), 0.9, 0.014)
     cn = nb.bump(nb.add(rp, nb.mul(nb.mul(wv, pud), 0.12)), 0.22, 0.004, cn)
-    cw = nb.mx(pud, nb.mul(damp, 0.1))
+    cw = nb.mx(pud, nb.mul(damp, 0.07))
     cr = nb.lerp(pud, 0.35, 0.004)
     b = nb.principled(**{'Base Color': col, 'Roughness': rough, 'Normal': nrm, 'Coat Weight': cw,
-                         'Coat Roughness': cr, 'Coat IOR': 1.33, 'Coat Normal': cn})
+                         'Coat Roughness': cr, 'Coat IOR': 1.33, 'Coat Normal': cn,
+                         'Specular IOR Level': nb.lerp(pud, 0.5, 0.0)})
     return nb.finish(b.outputs[0])
 
 
@@ -879,7 +880,8 @@ def m_sidewalk():
     H = nb.add(nb.noise(P, 0.8, 3.0), nb.mul(nb.sub(t['h'], 0.5), 0.2))
     pud = nb.mr(H, 0.40, 0.43, 1.0, 0.0, smooth=True)
     col = nb.mix(nb.mul(pud, 0.5), col, (0.03, 0.028, 0.022))
-    b = wet_surface(nb, col, nb.lerp(pud, t['rough'], 0.3), h, wet=0.85, streak=0, bump=0.9, bdist=0.012, coat=0.5)
+    b = wet_surface(nb, col, nb.lerp(pud, t['rough'], 0.95), h, wet=0.85, streak=0, bump=0.9, bdist=0.012, coat=0.3)
+    nb.set(b.inputs['Specular IOR Level'], nb.lerp(pud, 0.5, 0.0))
     rp = nb.mul(nb.add(nb.ripples(P, 2.6, 1.1, 0.5, 4.0), nb.mul(nb.ripples(P, 4.4, 1.5, 0.5, 5.0), 0.6)), pud)
     cn = nb.bump(rp, 0.2, 0.004, nb.bump(nb.mul(h, nb.inv(pud)), 0.3, 0.012))
     cw = nb.mx(pud, b.inputs['Coat Weight'].links[0].from_socket)
@@ -1041,19 +1043,21 @@ def m_wall():
     _x, _y, z = nb.sep(P)
     br = nb.pbr('brick', scale=1.0)
     pl = nb.pbr('plaster', scale=1.3)
+    pl['col'] = nb.mix(0.4, pl['col'], (0.46, 0.44, 0.40))
     big = nb.noise(P, 0.6, 6.0, 0.62, dist=0.5)
     low = nb.add(nb.mr(z, 0.15, 1.7, 0.2, 0.0), nb.mr(z, 5.6, 6.4, 0.0, 0.12))
     m = nb.add(nb.add(big, low), nb.mul(nb.sub(pl['h'], 0.5), 0.3))
     xx = nb.sep(P)[0]
+    warp = nb.noise(P, 1.7, 4.0, 0.6)
     for (cx, cz, rad) in ((1.35, 2.35, 0.75), (-3.1, 3.9, 0.7), (3.3, 5.3, 0.8), (-1.6, 5.7, 0.55), (3.1, 0.75, 0.6), (-2.4, 1.0, 0.5)):
-        dd = nb.vmath('LENGTH', nb.comb(nb.sub(xx, cx), 0.0, nb.mul(nb.sub(z, cz), 1.25)))
-        m = nb.add(m, nb.mr(dd, 0.0, rad, 0.2, 0.0, smooth=True))
+        dd = nb.add(nb.vmath('LENGTH', nb.comb(nb.sub(xx, cx), 0.0, nb.mul(nb.sub(z, cz), 1.25))), nb.mul(nb.sub(warp, 0.5), 0.9))
+        m = nb.add(m, nb.mr(dd, 0.0, rad, 0.3, 0.0, smooth=True))
     plaster = nb.mr(m, 0.6, 0.62, 1.0, 0.0)
     rim = nb.mul(nb.mr(m, 0.49, 0.615, 0.0, 1.0), plaster)
     dado = nb.mr(nb.add(z, nb.mul(nb.sub(nb.noise(P, 3.0, 2.0), 0.5), 0.02)), 1.38, 1.40, 1.0, 0.0)
     tintc = nb.mix(dado, (0.80, 0.70, 0.50), (0.16, 0.36, 0.34))
     painted = nb.hsv(nb.mix(1.0, pl['col'], tintc, blend='MULTIPLY'), v=1.9)
-    keep = nb.mr(nb.add(nb.noise(P, 2.4, 6.0, 0.7), nb.mul(nb.sub(pl['h'], 0.5), 0.5)), 0.36, 0.40, 0.0, 1.0)
+    keep = nb.mr(nb.add(nb.noise(P, 1.3, 6.0, 0.7), nb.mul(nb.sub(pl['h'], 0.5), 0.4)), 0.34, 0.38, 0.0, 1.0)
     pc = nb.mix(keep, nb.hsv(pl['col'], v=0.85), painted)
     pc = nb.mix(nb.mul(rim, 0.55), pc, (0.07, 0.06, 0.05))
     col = nb.mix(plaster, nb.hsv(br['col'], s=1.15, v=1.7), pc)
@@ -1360,7 +1364,7 @@ def build_building():
     # lis lantai, lis atap, kanopi seng
     box2('LisLantai', (-4, WALL_Y0 - 0.09, 3.26), (4, WALL_Y0 + 0.01, 3.38), M('conc'), bevel=0.01)
     box2('LisAtap', (-4, WALL_Y0 - 0.07, 6.4), (4, 4.0, 6.5), M('conc'), bevel=0.012)
-    seng = m_tex('SengKanopi', 'seng', scale=0.5, wet=0.8, drops=0.3, streak=0.3, metallic=0.5, val=0.9, rnd=False)
+    seng = m_tex('SengKanopi', 'seng', scale=0.5, wet=0.8, drops=0.3, streak=0.3, metallic=0.1, val=1.3, rnd=False)
     kx = (x0 + x1) / 2
     corrugated('Kanopi', (x1 - x0) + 0.5, 0.6, seng, loc=(kx, WALL_Y0 - 0.26, z1 + 0.28), rot=(radians(28), 0, 0))
     for sx in (-0.6, 0.6):
@@ -2999,19 +3003,25 @@ def build_rain():
     bm = bmesh.new()
     bmesh.ops.create_icosphere(bm, subdivisions=1, radius=1.0)
     for v in bm.verts:
-        v.co = (v.co.x * 0.0026, v.co.y * 0.0026, v.co.z * 0.006)
+        v.co = (v.co.x * 0.004, v.co.y * 0.004, v.co.z * 0.009)
     nb = NB('ButirHujan')
     b = nb.principled(**{'Base Color': (1, 1, 1), 'Roughness': 0.0, 'IOR': 1.33, 'Transmission Weight': 1.0})
-    drop = mk('ButirHujan', bm, nb.finish(b.outputs[0]), loc=(0, 0, -40))
+    tb = nb.node('ShaderNodeBsdfTranslucent')       # hamburan maju butir air, biar kena cahaya langsung
+    tb.inputs[0].default_value = (1, 1, 1, 1)
+    ms = nb.node('ShaderNodeMixShader')
+    ms.inputs[0].default_value = 0.6
+    nb.nt.links.new(b.outputs[0], ms.inputs[1])
+    nb.nt.links.new(tb.outputs[0], ms.inputs[2])
+    drop = mk('ButirHujan', bm, nb.finish(ms.outputs[0]), loc=(0, 0, -40))
     drop.visible_shadow = False
-    em = grid('PemancarHujan', -4.6, 4.6, -4.6, 4.6, 1, 1, None, z=9.6)
+    em = grid('PemancarHujan', -4.3, 3.9, -4.1, 3.9, 1, 1, None, z=9.6)     # hujan cuma di atas alas diorama
     em.show_instancer_for_render = False     # emitter tidak dirender, butirnya iya
     md = em.modifiers.new('Hujan', 'PARTICLE_SYSTEM')
     ps = md.particle_system
     st = ps.settings
     fall = 6.0
     life = int(9.8 / fall * FPS) + 4
-    st.count = 14000
+    st.count = 18000
     st.frame_start = -life - 4
     st.frame_end = F_END + 2
     st.lifetime = life
@@ -3020,7 +3030,7 @@ def build_rain():
     st.use_emit_random = True
     st.normal_factor = 0.0
     st.factor_random = 0.25
-    st.object_align_factor = (0.55, 0.15, -fall)
+    st.object_align_factor = (0.22, 0.06, -fall)
     st.physics_type = 'NEWTON'
     st.effector_weights.gravity = 0.0
     st.drag_factor = 0.0
@@ -3080,8 +3090,10 @@ def build_rain():
     ps2.point_cache.frame_start = -30
     ps2.point_cache.frame_end = F_END + 2
     t = time.time()
+    SCN.frame_start, SCN.frame_end = int(st.frame_start), F_END + 2     # bake ikut frame pemanasan
     with _ctx(em):
         bpy.ops.ptcache.bake_all(bake=True)
+    SCN.frame_start, SCN.frame_end = F_START, F_END
     log('gerimis dibake di memori: %.0f dtk' % (time.time() - t))
     return em
 
