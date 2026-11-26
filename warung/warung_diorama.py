@@ -303,7 +303,7 @@ def cyl(name, r, h, loc=(0, 0, 0), mat=None, n=24, bevel=0.003, rot=(0, 0, 0), p
 
 
 def lathe(name, prof, mat=None, n=32, loc=(0, 0, 0), rot=(0, 0, 0), parent=None, sub=0, solid=0.0,
-          bevel=0.0, sharp=50):
+          bevel=0.0012, sharp=50):
     """Putar profil [(r, z), ...] mengelilingi sumbu Z."""
     bm = bmesh.new()
     rings = []
@@ -323,7 +323,8 @@ def lathe(name, prof, mat=None, n=32, loc=(0, 0, 0), rot=(0, 0, 0), parent=None,
                 bm.faces.new((a[i], a[j], b[0]))
             else:
                 bm.faces.new((a[i], a[j], b[j], b[i]))
-    ob = mk(name, bm, mat, loc, rot, parent, bevel, sharp=sharp)
+    span = max(max(p[0] for p in prof), max(p[1] for p in prof) - min(p[1] for p in prof))
+    ob = mk(name, bm, mat, loc, rot, parent, 0.0 if (sub or solid) else min(bevel, span * 0.02), sharp=sharp, bsegs=1)
     if solid:
         s = ob.modifiers.new('Solid', 'SOLIDIFY')
         s.thickness = solid
@@ -465,6 +466,8 @@ def text(name, body, size, mat=None, loc=(0, 0, 0), rot=(0, 0, 0), parent=None, 
     cu.align_x = ax
     cu.align_y = ay
     cu.extrude = extrude
+    cu.bevel_depth = extrude * 0.5
+    cu.bevel_resolution = 1
     cu.offset = bold * size
     cu.shear = shear
     cu.space_character = spacing
@@ -1256,7 +1259,7 @@ def build_base():
         i += 1
     # pondasi batu kali di bawah tembok
     fp = [(2.95, -0.7), (3.02, 0.03), (3.55, 0.03), (3.8, -0.7)]
-    loft('Pondasi', [[(xx, y, z) for (y, z) in fp] for xx in (-4 - e, 4 + e)], M('stone'), bevel=0.0)
+    loft('Pondasi', [[(xx, y, z) for (y, z) in fp] for xx in (-4 - e, 4 + e)], M('stone'), bevel=0.008)
     # pipa yang kepotong
     pipe_stub('Gorong', 'Y', -4.0 - 0.03, -3.0, (-0.95, -0.60), 0.27, 0.22, M('conc'))
     cyl('GorongGelap', 0.22, 0.02, (-0.95, -3.4, -0.60), m_plastic('LubangGelap', (0.004, 0.004, 0.004), 0.9, wet=0, drops=0), rot=(pi / 2, 0, 0), bevel=0)
@@ -1307,11 +1310,8 @@ def build_building():
     bc = M('brick_cut')
     x0, x1, z0, z1 = WIN
     rx0, rx1, rz0, rz1 = x0 - 0.5, x1 + 0.5, z0 - 0.45, z1 + 0.35
-    box2('Bgn_bawah', (-4, WALL_Y1, 0.03), (4, 4.0, rz0), bc, bevel=0)
-    box2('Bgn_atas', (-4, WALL_Y1, rz1), (4, 4.0, 6.4), bc, bevel=0)
-    box2('Bgn_kiri', (-4, WALL_Y1, rz0), (rx0, 4.0, rz1), bc, bevel=0)
-    box2('Bgn_kanan', (rx1, WALL_Y1, rz0), (4, 4.0, rz1), bc, bevel=0)
-    box2('Bgn_blk', (rx0, 3.93, rz0), (rx1, 4.0, rz1), bc, bevel=0)
+    wall_with_holes('BadanBangunan', -4, 4, 0.03, 6.4, [(rx0, rx1, rz0, rz1)], WALL_Y1, 3.93, bc)
+    box2('BangunanBelakang', (-4, 3.93, 0.03), (4, 4.0, 6.4), bc, bevel=0.006)
     # lapisan dalam kamar
     room = m_tex('DindingKamar', 'plaster', scale=1.0, tint=(0.95, 0.85, 0.62), val=1.6, wet=0.0, streak=0.0, grime=0.25, rnd=False)
     e = 0.004
@@ -1637,11 +1637,15 @@ def fmt_t(s):
     return '%dj %02dm %02dd' % (s // 3600, s % 3600 // 60, s % 60)
 
 
-def render_frames(device):
+def render_frames():
     frames = ARGS.frame_list
     path = lambda f: os.path.join(ARGS.out, 'frame_%04d.png' % f)
     todo = [f for f in frames if ARGS.overwrite or not (os.path.exists(path(f)) and os.path.getsize(path(f)) > 1000)]
     log('frame diminta: %d, sudah ada: %d, akan dirender: %d' % (len(frames), len(frames) - len(todo), len(todo)))
+    if not todo:
+        log('tidak ada frame yang perlu dirender')
+        return
+    device = pick_device()
     logf = os.path.join(ARGS.out, 'render_log.csv')
     if not os.path.exists(logf):
         with open(logf, 'w') as f:
@@ -2251,9 +2255,13 @@ def m_tarp():
     col = nb.mix(dirt, col, (0.07, 0.06, 0.045))
     mud = nb.mr(nb.noise(nb.mapping(U, scale=(1.0, 0.25, 1.0)), 3.0, 4.0, 0.65), 0.52, 0.7, 0.0, 0.6, smooth=True)
     col = nb.mix(mud, col, (0.10, 0.085, 0.06))
+    patch = nb.mx(nb.mul(band(nb, ux, 0.95, 1.4, 0.004), band(nb, uy, 1.25, 1.62, 0.004)), nb.mul(band(nb, ux, 2.55, 2.85, 0.004), band(nb, uy, 0.55, 1.0, 0.004)))
+    seam = nb.sub(patch, nb.mx(nb.mul(band(nb, ux, 0.97, 1.38, 0.004), band(nb, uy, 1.27, 1.6, 0.004)), nb.mul(band(nb, ux, 2.57, 2.83, 0.004), band(nb, uy, 0.57, 0.98, 0.004))))
+    col = nb.mix(nb.mul(patch, 0.85), col, nb.mix(back, (0.30, 0.34, 0.40), (0.42, 0.40, 0.36)))
+    col = nb.mix(nb.math('MULTIPLY', seam, 0.8, clamp=True), col, (0.02, 0.02, 0.025))
     weave = nb.mul(nb.math('SINE', nb.mul(ux, 3000.0)), nb.math('SINE', nb.mul(uy, 3000.0)))
     wr = nb.noise(nb.mapping(U, rot=(0, 0, 0.5), scale=(1.0, 4.0, 1.0)), 7.0, 3.0, 0.6, dist=0.8)
-    h = nb.add(nb.add(nb.mul(cr, 0.8), nb.mul(wr, 0.6)), nb.mul(weave, 0.06))
+    h = nb.add(nb.add(nb.add(nb.mul(cr, 0.8), nb.mul(wr, 0.6)), nb.mul(weave, 0.06)), nb.mul(patch, 0.5))
     nrm = nb.bump(h, 0.6, 0.008)
     front = nb.inv(back)
     dh = nb.mul(nb.drops(U, 70.0, 0.55), front)
@@ -3202,8 +3210,7 @@ def main():
         bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(ARGS.save_blend))
     if ARGS.no_render:
         return
-    dev = pick_device()
-    render_frames(dev)
+    render_frames()
 
 
 if __name__ == '__main__':
