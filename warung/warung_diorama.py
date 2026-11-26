@@ -12,7 +12,7 @@ Semua aset luar (tekstur PBR + beberapa model) CC0 dari Poly Haven, diunduh send
 script ke --assets. Semua simulasi (kain terpal, kain spanduk, uap, gerimis) dibake ulang
 oleh script ke --cache kalau cache-nya belum ada.
 """
-import bpy, bmesh, sys, os, math, json, time, random, struct, argparse, shutil, hashlib
+import bpy, bmesh, sys, os, math, json, time, random, struct, argparse, shutil, hashlib, subprocess
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from math import radians, sin, cos, pi, sqrt, atan2
@@ -52,6 +52,8 @@ def parse_args():
     p.add_argument('--skip-sim', action='store_true', help='(debug) lewati semua simulasi')
     p.add_argument('--rebake', action='store_true', help='buang cache simulasi lalu bake ulang')
     p.add_argument('--seed', type=int, default=7)
+    p.add_argument('--blender-bin', default=None, help='binary Blender untuk bake uap kalau script jalan sebagai modul bpy')
+    p.add_argument('--steam-only', action='store_true', help='(internal) bake cache uap saja lalu keluar')
     p.add_argument('--threads', type=int, default=0)
     p.add_argument('--no-denoise', action='store_true')
     p.add_argument('--cam-el', type=float, default=None, help='(debug) elevasi kamera')
@@ -2775,6 +2777,8 @@ PRE_CLOTH = 50          # frame pemanasan supaya kain sudah tenang di frame 1
 PRE_STEAM = 110
 STEAM_P = dict(res=104, noise=True, beta=1.6, alpha=-0.05, vort=0.2, tscale=1.25, dissolve=42, dens=0.9, temp=1.6,
                vel=0.25, wind=0.35, shade=6.0)
+STEAM_P.update(json.loads(os.environ.get('WARUNG_STEAM', '{}')))     # (debug) override parameter uap
+IS_MODULE = bool(getattr(bpy.app, 'module', False)) or not bpy.app.binary_path
 SIM_PROXIES = []
 
 
@@ -2891,6 +2895,17 @@ def bake_steam(gerobak):
     hi = Vector((px + 0.85, py + 0.75, pz + 1.9))
     if ARGS.rebake and os.path.isdir(d):
         shutil.rmtree(d)
+    if not os.path.exists(ok) and IS_MODULE:
+        # Mantaflow tidak bisa jalan di build modul bpy (binding Python-nya tidak terdaftar, proses
+        # langsung abort). Bake dilempar ke binary Blender versi sama; hasilnya dipakai dari --cache.
+        exe = ARGS.blender_bin or os.environ.get('BLENDER_BIN') or shutil.which('blender')
+        if not exe:
+            raise RuntimeError('Cache uap belum ada dan bake Mantaflow tidak jalan di modul bpy. Kasih binary Blender %s '
+                               'lewat --blender-bin atau env BLENDER_BIN, atau jalankan sekali: blender -b -P warung_diorama.py -- '
+                               '--steam-only --cache %s' % (bpy.app.version_string.split()[0], ARGS.cache))
+        log('modul bpy: bake uap dijalankan lewat %s' % exe)
+        subprocess.run([exe, '-b', '--factory-startup', '--python-exit-code', '1', '-P', os.path.abspath(__file__), '--',
+                        '--steam-only', '--assets', ARGS.assets, '--cache', ARGS.cache, '--out', ARGS.out], check=True)
     if not os.path.exists(ok):
         t = time.time()
         if os.path.isdir(d):
@@ -3193,6 +3208,11 @@ def main():
     COL = SCN.collection
     ensure_assets()
     setup_render()
+    if ARGS.steam_only:
+        g = build_gerobak()
+        bpy.context.view_layer.update()
+        bake_steam(g)
+        return
     make_atlas()
     build_base()
     build_building()
