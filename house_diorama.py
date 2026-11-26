@@ -36,6 +36,7 @@ def parse():
     p.add_argument('--tag', default='')
     p.add_argument('--save-blend', default=None)
     p.add_argument('--threads', type=int, default=0)
+    p.add_argument('--reverse', action='store_true', help='render dari frame akhir mundur')
     return p.parse_args(argv)
 
 
@@ -2076,7 +2077,8 @@ def main():
         log('STILL frame %d selesai dalam %.1f detik -> %s' % (ARGS.still, time.time() - t, path))
     if ARGS.anim:
         times = []
-        for f in range(ARGS.start, ARGS.end + 1):
+        order = range(ARGS.end, ARGS.start - 1, -1) if ARGS.reverse else range(ARGS.start, ARGS.end + 1)
+        for f in order:
             path = os.path.join(frames_dir, 'frame_%04d.png' % f)
             if os.path.exists(path) and os.path.getsize(path) > 0:
                 continue
@@ -2088,12 +2090,12 @@ def main():
             bpy.ops.render.render(write_still=True)
             os.replace(tmp, path)
             times.append(time.time() - t)
-            left = sum(1 for k in range(f + 1, ARGS.end + 1)
+            left = sum(1 for k in range(ARGS.start, ARGS.end + 1)
                        if not os.path.exists(os.path.join(frames_dir, 'frame_%04d.png' % k)))
             log('FRAME %d/%d selesai %.1f dtk (rata-rata %.1f dtk), sisa %d frame, perkiraan %.1f menit' %
                 (f, ARGS.end, times[-1], sum(times) / len(times), left, left * sum(times) / len(times) / 60))
-        if all(os.path.exists(os.path.join(frames_dir, 'frame_%04d.png' % k)) for k in range(ARGS.start, ARGS.end + 1)):
-            encode(frames_dir, ARGS.start)
+        if all(os.path.exists(os.path.join(frames_dir, 'frame_%04d.png' % k)) for k in range(1, 121)):
+            encode(frames_dir, 1)
         log('ANIMASI SELESAI')
 
 
