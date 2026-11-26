@@ -56,6 +56,7 @@ def parse_args():
     p.add_argument('--steam-only', action='store_true', help='(internal) bake cache uap saja lalu keluar')
     p.add_argument('--threads', type=int, default=0)
     p.add_argument('--no-denoise', action='store_true')
+    p.add_argument('--no-bloom', action='store_true', help='(debug) matikan bloom kompositor')
     p.add_argument('--cam-el', type=float, default=None, help='(debug) elevasi kamera')
     p.add_argument('--crop', default=None, help='(debug) x0,x1,y0,y1 border 0..1; beberapa dipisah ;')
     a = p.parse_args(argv)
@@ -837,7 +838,7 @@ def m_asphalt():
     deep = nb.mr(H, L - 0.16, L, 1.0, 0.0)
     damp = nb.mul(nb.mr(H, L, L + 0.26, 1.0, 0.45, smooth=True), nb.mr(sh, 0, 1, 1.0, 0.3))
     # warna: variasi besar, tambalan, garis cat pudar
-    base = nb.mix(nb.mr(nb.noise(P, 0.9, 4.0), 0.3, 0.7, 0.0, 1.0), nb.hsv(t['col'], v=0.36), nb.hsv(t['col'], v=0.52))
+    base = nb.mix(nb.mr(nb.noise(P, 0.9, 4.0), 0.3, 0.7, 0.0, 1.0), nb.hsv(t['col'], v=0.27), nb.hsv(t['col'], v=0.40))
     patch = nb.mul(band(nb, x, -3.3, -1.9, 0.02), band(nb, y, -3.4, -2.3, 0.02))
     base = nb.mix(nb.mul(patch, 0.55), base, (0.02, 0.02, 0.022))
     wear = nb.mr(nb.add(nb.noise(P, 5.0, 5.0, 0.7), nb.mul(t['h'], 0.6)), 0.72, 0.88, 0.0, 1.0)
@@ -3018,13 +3019,13 @@ def build_rain():
     bm = bmesh.new()
     bmesh.ops.create_icosphere(bm, subdivisions=1, radius=1.0)
     for v in bm.verts:
-        v.co = (v.co.x * 0.004, v.co.y * 0.004, v.co.z * 0.009)
+        v.co = (v.co.x * 0.0035, v.co.y * 0.0035, v.co.z * 0.008)
     nb = NB('ButirHujan')
     b = nb.principled(**{'Base Color': (1, 1, 1), 'Roughness': 0.0, 'IOR': 1.33, 'Transmission Weight': 1.0})
     tb = nb.node('ShaderNodeBsdfTranslucent')       # hamburan maju butir air, biar kena cahaya langsung
     tb.inputs[0].default_value = (1, 1, 1, 1)
     ms = nb.node('ShaderNodeMixShader')
-    ms.inputs[0].default_value = 0.6
+    ms.inputs[0].default_value = 0.35
     nb.nt.links.new(b.outputs[0], ms.inputs[1])
     nb.nt.links.new(tb.outputs[0], ms.inputs[2])
     drop = mk('ButirHujan', bm, nb.finish(ms.outputs[0]), loc=(0, 0, -40))
@@ -3036,7 +3037,7 @@ def build_rain():
     st = ps.settings
     fall = 6.0
     life = int(9.8 / fall * FPS) + 4
-    st.count = 18000
+    st.count = 11000
     st.frame_start = -life - 4
     st.frame_end = F_END + 2
     st.lifetime = life
@@ -3230,7 +3231,8 @@ def main():
     fit_camera()
     build_camera()
     animate_neon()
-    setup_compositor()
+    if not ARGS.no_bloom:
+        setup_compositor()
     bpy.context.view_layer.update()
     if not ARGS.skip_sim:
         bake_cloth()
