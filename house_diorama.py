@@ -26,7 +26,7 @@ def parse():
     p.add_argument('--encode-only', action='store_true')
     p.add_argument('--start', type=int, default=1)
     p.add_argument('--end', type=int, default=120)
-    p.add_argument('--samples', type=int, default=384)
+    p.add_argument('--samples', type=int, default=1024)
     p.add_argument('--device', default='AUTO', choices=['AUTO', 'CPU', 'GPU'])
     p.add_argument('--scale', type=int, default=100, help='persen resolusi (preview saja)')
     p.add_argument('--density', type=float, default=1.0, help='pengali jumlah daun/rumput (preview saja)')
@@ -648,10 +648,10 @@ def mat_paint():
     base = mulc(nt, base, mapr(nt, rnd, 0.0, 0.1, 0.80, 1.0))
     base = mulc(nt, base, mapr(nt, noise(nt, obj, 1.1, 4.0), 0.3, 0.7, 0.93, 1.02))
     dirt = fmath(nt, 'MULTIPLY', mapr(nt, z, FL, FL + 0.85, 1.0, 0.0),
-                 mapr(nt, noise(nt, obj, 3.5, 5.0, 0.6), 0.35, 0.72, 0.0, 1.0))
+                 mapr(nt, noise(nt, obj, 3.5, 5.0, 0.6), 0.40, 0.62, 0.0, 1.0))
     base = mixc(nt, fmath(nt, 'MULTIPLY', dirt, 0.55), base, (0.33, 0.29, 0.22))
     streak = noise(nt, mapping(nt, obj, scale=(11.0, 11.0, 0.45)), 1.0, 3.0, 0.5)
-    topm = fmath(nt, 'MULTIPLY', mapr(nt, z, WTOP - 1.1, WTOP, 0.0, 1.0), mapr(nt, streak, 0.5, 0.74, 0.0, 1.0))
+    topm = fmath(nt, 'MULTIPLY', mapr(nt, z, WTOP - 1.1, WTOP, 0.0, 1.0), mapr(nt, streak, 0.48, 0.64, 0.0, 1.0))
     base = mixc(nt, fmath(nt, 'MULTIPLY', topm, 0.38), base, (0.30, 0.285, 0.26))
     rough = fmath(nt, 'ADD', mapr(nt, T['rough'], 0, 1, 0.42, 0.72), fmath(nt, 'MULTIPLY', dirt, 0.15))
     h = fmath(nt, 'ADD', T['height'], fmath(nt, 'MULTIPLY', noise(nt, obj, 160.0, 2.0), 0.25))
@@ -669,13 +669,13 @@ def mat_concrete(name, key='concrete', tile=1.6, tint=(1, 1, 1), bump_s=0.6, gri
     T = tex_set(nt, key, vec)
     g = geom(nt)
     col = mulc(nt, T['color'], tint)
-    col = mulc(nt, col, mapr(nt, rnd, 0, 1, 0.90, 1.06))
-    col = mulc(nt, col, mapr(nt, noise(nt, obj, 0.9, 5.0, 0.6), 0.3, 0.75, 1.0 - 0.5 * grime, 1.06))
-    col = mulc(nt, col, mapr(nt, noise(nt, obj, 4.5, 6.0, 0.7), 0.25, 0.75, 1.0 - 0.38 * grime, 1.10))
-    col = mixc(nt, mapr(nt, noise(nt, obj, 2.2, 7.0, 0.75), 0.58, 0.72, 0.0, 0.5 * grime), col, (0.16, 0.15, 0.13))
+    col = mulc(nt, col, mapr(nt, rnd, 0, 1, 0.80, 1.08))
+    col = mulc(nt, col, mapr(nt, noise(nt, obj, 0.9, 5.0, 0.6), 0.38, 0.62, 1.0 - 0.5 * grime, 1.06))
+    col = mulc(nt, col, mapr(nt, noise(nt, obj, 4.5, 6.0, 0.7), 0.36, 0.64, 1.0 - 0.38 * grime, 1.10))
+    col = mixc(nt, mapr(nt, noise(nt, obj, 2.2, 7.0, 0.75), 0.54, 0.66, 0.0, 0.55 * grime), col, (0.16, 0.15, 0.13))
     nz = node(nt, 'ShaderNodeSeparateXYZ', {0: g.outputs['Normal']}).outputs[2]
     vert = mapr(nt, fmath(nt, 'ABSOLUTE', nz), 0.2, 0.6, 1.0, 0.0)
-    streak = mapr(nt, noise(nt, mapping(nt, obj, scale=(7.0, 7.0, 0.5)), 1.0, 3.0), 0.48, 0.72, 0.0, 1.0)
+    streak = mapr(nt, noise(nt, mapping(nt, obj, scale=(7.0, 7.0, 0.5)), 1.0, 3.0), 0.46, 0.62, 0.0, 1.0)
     col = mixc(nt, fmath(nt, 'MULTIPLY', fmath(nt, 'MULTIPLY', vert, streak), 0.35 * grime), col, (0.13, 0.125, 0.115))
     wear = mapr(nt, g.outputs['Pointiness'], 0.52, 0.66, 0.0, 1.0)
     col = mixc(nt, fmath(nt, 'MULTIPLY', wear, 0.5), col, (0.62, 0.61, 0.58))
@@ -785,7 +785,7 @@ def mat_rock():
                                            2: fmath(nt, 'MULTIPLY', rnd, 6.7)}).outputs[0]
     vec = node(nt, 'ShaderNodeVectorMath', {0: mapping(nt, obj, scale=(1.3,) * 3), 1: off}).outputs[0]
     T = tex_set(nt, 'rock', vec, blend=0.35)
-    col = mixc(nt, 0.25, mulc(nt, T['color'], 1.9), (0.15, 0.15, 0.155))
+    col = mixc(nt, 0.25, mulc(nt, T['color'], 2.4), (0.20, 0.20, 0.205))
     col = mulc(nt, col, mapr(nt, rnd, 0, 1, 0.8, 1.25))
     g = geom(nt)
     nz = node(nt, 'ShaderNodeSeparateXYZ', {0: g.outputs['Normal']}).outputs[2]
@@ -933,9 +933,9 @@ def build_materials():
     M['roof'] = mat_roof()
     M['floor'] = mat_floor()
     M['intwall'] = mat_simple('dinding_dalam', (0.74, 0.70, 0.62), rough=0.6, nscale=120, nstr=0.1, var=0.04)
-    M['sofa'] = mat_simple('kain_sofa', (0.17, 0.16, 0.15), rough=0.85, nscale=600, nstr=0.5, sheen=0.4)
-    M['cushion'] = mat_simple('kain_bantal', (0.42, 0.17, 0.05), rough=0.85, nscale=600, nstr=0.5, sheen=0.4)
-    M['rug'] = mat_simple('karpet', (0.24, 0.20, 0.16), rough=0.95, nscale=900, nstr=0.8, sheen=0.5, var=0.12)
+    M['sofa'] = mat_simple('kain_sofa', (0.17, 0.16, 0.15), rough=0.9, nscale=600, nstr=0.5, sheen=0.08)
+    M['cushion'] = mat_simple('kain_bantal', (0.42, 0.17, 0.05), rough=0.9, nscale=600, nstr=0.5, sheen=0.08)
+    M['rug'] = mat_simple('karpet', (0.24, 0.20, 0.16), rough=0.95, nscale=900, nstr=0.8, sheen=0.1, var=0.12)
     M['curtain'] = mat_curtain()
     M['shade'] = mat_emit('kap_lampu', (1.0, 0.60, 0.28), 14.0)
     M['bulb'] = mat_emit('lampu_dinding', (1.0, 0.66, 0.34), 40.0)
@@ -1491,7 +1491,7 @@ def make_rock(size, seed):
     nz = np.array([mnoise.noise(Vector((p[0] * 2.2 + off[0], p[1] * 2.2 + off[1], p[2] * 2.2 + off[2]))) +
                    0.4 * mnoise.noise(Vector((p[0] * 7 + off[2], p[1] * 7 + off[0], p[2] * 7 + off[1]))) for p in P])
     P = P * (1 + 0.11 * nz)[:, None]
-    P = P * size * np.array([1.0, r.uniform(0.65, 0.95), r.uniform(0.5, 0.8)])
+    P = P * size * np.array([1.0, r.uniform(0.65, 0.95), r.uniform(0.6, 0.95)])
     ya = r.uniform(0, 6.28)
     c, s = math.cos(ya), math.sin(ya)
     P = np.stack([P[:, 0] * c - P[:, 1] * s, P[:, 0] * s + P[:, 1] * c, P[:, 2]], 1)
@@ -1505,7 +1505,7 @@ def build_rocks():
         zmin, zmax = P[:, 2].min(), P[:, 2].max()
         P = P + np.array([cx, cy, -zmin - 0.22 * (zmax - zmin)])
         g.add(P, F, attrs={'rnd': np.full(len(P), RNG.random())})
-    g.build('batu', [MATS['rock']], smooth=True)
+    g.build('batu', [MATS['rock']], smooth=False)
 
 
 def grass_clump(g, c, h, dry, n, plume=True, radius=0.16):
@@ -1850,7 +1850,7 @@ def setup_world():
     nt = w.node_tree
     nt.nodes.clear()
     bg = nt.nodes.new('ShaderNodeBackground')
-    bg.inputs['Strength'].default_value = 1.0
+    bg.inputs['Strength'].default_value = 0.85
     o = nt.nodes.new('ShaderNodeOutputWorld')
     nt.links.new(bg.outputs[0], o.inputs['Surface'])
     if 'hdri' in TEXFILES:
@@ -1877,8 +1877,8 @@ def setup_world():
         nt.links.new(sky.outputs[0], bg.inputs['Color'])
         bg.inputs['Strength'].default_value = 0.25
     L = bpy.data.lights.new('matahari', 'SUN')
-    L.energy = 6.5
-    L.color = (1.0, 0.80, 0.56)
+    L.energy = 7.0
+    L.color = (1.0, 0.75, 0.49)
     L.angle = math.radians(2.6)
     so = bpy.data.objects.new('matahari', L)
     d = Vector((math.cos(SUN_EL) * math.cos(SUN_AZ), math.cos(SUN_EL) * math.sin(SUN_AZ), math.sin(SUN_EL)))
