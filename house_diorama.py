@@ -37,6 +37,8 @@ def parse():
     p.add_argument('--save-blend', default=None)
     p.add_argument('--threads', type=int, default=0)
     p.add_argument('--reverse', action='store_true', help='render dari frame akhir mundur')
+    p.add_argument('--budget', type=float, default=0, help='batas detik; berhenti rapi sebelum frame yang ga bakal keburu')
+    p.add_argument('--frame-guess', type=float, default=2700, help='perkiraan detik per frame sebelum ada ukuran')
     return p.parse_args(argv)
 
 
@@ -2082,6 +2084,10 @@ def main():
             path = os.path.join(frames_dir, 'frame_%04d.png' % f)
             if os.path.exists(path) and os.path.getsize(path) > 0:
                 continue
+            need = (max(times) if times else ARGS.frame_guess) * 1.12
+            if ARGS.budget and (time.time() - T0) + need > ARGS.budget:
+                log('BUDGET waktu habis sebelum frame %d, berhenti rapi' % f)
+                break
             sc.frame_set(f)
             rig.rotation_euler = (0, 0, orbit_angle(f))
             tmp = os.path.join(frames_dir, 'tmp_%04d.png' % f)
