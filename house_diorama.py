@@ -670,8 +670,9 @@ def mat_concrete(name, key='concrete', tile=1.6, tint=(1, 1, 1), bump_s=0.6, gri
     g = geom(nt)
     col = mulc(nt, T['color'], tint)
     col = mulc(nt, col, mapr(nt, rnd, 0, 1, 0.90, 1.06))
-    col = mulc(nt, col, mapr(nt, noise(nt, obj, 0.9, 5.0, 0.6), 0.3, 0.75, 1.0 - 0.3 * grime, 1.05))
-    col = mulc(nt, col, mapr(nt, noise(nt, obj, 4.5, 6.0, 0.7), 0.25, 0.75, 1.0 - 0.28 * grime, 1.08))
+    col = mulc(nt, col, mapr(nt, noise(nt, obj, 0.9, 5.0, 0.6), 0.3, 0.75, 1.0 - 0.5 * grime, 1.06))
+    col = mulc(nt, col, mapr(nt, noise(nt, obj, 4.5, 6.0, 0.7), 0.25, 0.75, 1.0 - 0.38 * grime, 1.10))
+    col = mixc(nt, mapr(nt, noise(nt, obj, 2.2, 7.0, 0.75), 0.58, 0.72, 0.0, 0.5 * grime), col, (0.16, 0.15, 0.13))
     nz = node(nt, 'ShaderNodeSeparateXYZ', {0: g.outputs['Normal']}).outputs[2]
     vert = mapr(nt, fmath(nt, 'ABSOLUTE', nz), 0.2, 0.6, 1.0, 0.0)
     streak = mapr(nt, noise(nt, mapping(nt, obj, scale=(7.0, 7.0, 0.5)), 1.0, 3.0), 0.48, 0.72, 0.0, 1.0)
@@ -784,7 +785,7 @@ def mat_rock():
                                            2: fmath(nt, 'MULTIPLY', rnd, 6.7)}).outputs[0]
     vec = node(nt, 'ShaderNodeVectorMath', {0: mapping(nt, obj, scale=(1.3,) * 3), 1: off}).outputs[0]
     T = tex_set(nt, 'rock', vec, blend=0.35)
-    col = mixc(nt, 0.35, T['color'], (0.13, 0.13, 0.135))
+    col = mixc(nt, 0.25, mulc(nt, T['color'], 1.9), (0.15, 0.15, 0.155))
     col = mulc(nt, col, mapr(nt, rnd, 0, 1, 0.8, 1.25))
     g = geom(nt)
     nz = node(nt, 'ShaderNodeSeparateXYZ', {0: g.outputs['Normal']}).outputs[2]
@@ -794,7 +795,7 @@ def mat_rock():
     col = mixc(nt, lich, col, (0.26, 0.27, 0.20))
     h = fmath(nt, 'ADD', T['height'], fmath(nt, 'MULTIPLY', noise(nt, obj, 90.0, 3.0), 0.12))
     out(nt, principled(nt, Base_Color=col, Roughness=mapr(nt, T['rough'], 0, 1, 0.78, 0.96),
-                       Normal=bump(nt, h, 1.0, 0.03)))
+                       Normal=bump(nt, h, 1.0, 0.06)))
     return m
 
 
@@ -932,9 +933,9 @@ def build_materials():
     M['roof'] = mat_roof()
     M['floor'] = mat_floor()
     M['intwall'] = mat_simple('dinding_dalam', (0.74, 0.70, 0.62), rough=0.6, nscale=120, nstr=0.1, var=0.04)
-    M['sofa'] = mat_simple('kain_sofa', (0.36, 0.33, 0.29), rough=0.85, nscale=600, nstr=0.5, sheen=0.4)
-    M['cushion'] = mat_simple('kain_bantal', (0.55, 0.27, 0.10), rough=0.85, nscale=600, nstr=0.5, sheen=0.4)
-    M['rug'] = mat_simple('karpet', (0.52, 0.47, 0.40), rough=0.95, nscale=900, nstr=0.8, sheen=0.5, var=0.12)
+    M['sofa'] = mat_simple('kain_sofa', (0.17, 0.16, 0.15), rough=0.85, nscale=600, nstr=0.5, sheen=0.4)
+    M['cushion'] = mat_simple('kain_bantal', (0.42, 0.17, 0.05), rough=0.85, nscale=600, nstr=0.5, sheen=0.4)
+    M['rug'] = mat_simple('karpet', (0.24, 0.20, 0.16), rough=0.95, nscale=900, nstr=0.8, sheen=0.5, var=0.12)
     M['curtain'] = mat_curtain()
     M['shade'] = mat_emit('kap_lampu', (1.0, 0.60, 0.28), 14.0)
     M['bulb'] = mat_emit('lampu_dinding', (1.0, 0.66, 0.34), 40.0)
@@ -1489,7 +1490,7 @@ def make_rock(size, seed):
     off = r.uniform(0, 100, 3)
     nz = np.array([mnoise.noise(Vector((p[0] * 2.2 + off[0], p[1] * 2.2 + off[1], p[2] * 2.2 + off[2]))) +
                    0.4 * mnoise.noise(Vector((p[0] * 7 + off[2], p[1] * 7 + off[0], p[2] * 7 + off[1]))) for p in P])
-    P = P * (1 + 0.07 * nz)[:, None]
+    P = P * (1 + 0.11 * nz)[:, None]
     P = P * size * np.array([1.0, r.uniform(0.65, 0.95), r.uniform(0.5, 0.8)])
     ya = r.uniform(0, 6.28)
     c, s = math.cos(ya), math.sin(ya)
