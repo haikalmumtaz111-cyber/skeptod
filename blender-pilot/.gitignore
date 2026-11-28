@@ -1,0 +1,11 @@
+# render output and caches: large, reproducible from the scripts
+frames/
+frames_old_shot2tail/
+engine_test/
+out/
+*.blend
+*.blend1
+__pycache__/
+render_stdout.log
+rerender_stdout.log
+pip_bpy.log

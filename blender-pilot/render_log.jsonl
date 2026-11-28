@@ -1,0 +1,450 @@
+{"frame": 0, "sec": 8.625, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 1, "sec": 9.911, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 2, "sec": 9.876, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 3, "sec": 9.67, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 4, "sec": 10.158, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 5, "sec": 9.299, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 6, "sec": 9.655, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 7, "sec": 9.709, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 8, "sec": 9.948, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 9, "sec": 10.101, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 10, "sec": 9.518, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 11, "sec": 9.503, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 12, "sec": 9.442, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 13, "sec": 9.357, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 14, "sec": 9.433, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 15, "sec": 9.676, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 16, "sec": 9.703, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 17, "sec": 9.32, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 18, "sec": 8.877, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 19, "sec": 8.974, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 20, "sec": 9.212, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 21, "sec": 9.427, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 22, "sec": 9.563, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 23, "sec": 10.191, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 24, "sec": 10.3, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 25, "sec": 9.746, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 26, "sec": 9.716, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 27, "sec": 9.728, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 28, "sec": 9.482, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 29, "sec": 9.45, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 30, "sec": 9.522, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 31, "sec": 9.215, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 32, "sec": 9.047, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 33, "sec": 8.883, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 34, "sec": 9.129, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 35, "sec": 9.611, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 36, "sec": 9.134, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 37, "sec": 9.578, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 38, "sec": 9.65, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 39, "sec": 9.508, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 40, "sec": 9.356, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 41, "sec": 8.708, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 42, "sec": 9.379, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 43, "sec": 9.279, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE"}
+{"frame": 44, "sec": 9.219, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1508}
+{"frame": 45, "sec": 10.196, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1622}
+{"frame": 46, "sec": 10.561, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1636}
+{"frame": 47, "sec": 11.034, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1665}
+{"frame": 48, "sec": 10.702, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1714}
+{"frame": 49, "sec": 10.684, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1657}
+{"frame": 50, "sec": 10.248, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1656}
+{"frame": 51, "sec": 10.151, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1725}
+{"frame": 52, "sec": 10.055, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1664}
+{"frame": 53, "sec": 10.042, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1703}
+{"frame": 54, "sec": 10.384, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1703}
+{"frame": 55, "sec": 10.561, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1724}
+{"frame": 56, "sec": 10.722, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1738}
+{"frame": 57, "sec": 10.109, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1727}
+{"frame": 58, "sec": 11.013, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1730}
+{"frame": 59, "sec": 10.635, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1771}
+{"frame": 60, "sec": 10.942, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1742}
+{"frame": 61, "sec": 10.139, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1753}
+{"frame": 62, "sec": 10.409, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1723}
+{"frame": 63, "sec": 10.463, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1751}
+{"frame": 64, "sec": 10.879, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1767}
+{"frame": 65, "sec": 10.639, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1809}
+{"frame": 66, "sec": 11.02, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1783}
+{"frame": 67, "sec": 10.08, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1759}
+{"frame": 68, "sec": 10.474, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1841}
+{"frame": 69, "sec": 10.22, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1869}
+{"frame": 70, "sec": 10.435, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1828}
+{"frame": 71, "sec": 9.879, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1865}
+{"frame": 72, "sec": 10.224, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1751}
+{"frame": 73, "sec": 10.601, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1761}
+{"frame": 74, "sec": 9.469, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1485}
+{"frame": 75, "sec": 12.534, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1590}
+{"frame": 76, "sec": 10.01, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1670}
+{"frame": 77, "sec": 10.435, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1632}
+{"frame": 78, "sec": 9.737, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1640}
+{"frame": 79, "sec": 9.858, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1654}
+{"frame": 80, "sec": 10.212, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1619}
+{"frame": 81, "sec": 10.453, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1659}
+{"frame": 82, "sec": 10.234, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1696}
+{"frame": 83, "sec": 10.225, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1702}
+{"frame": 84, "sec": 9.962, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1740}
+{"frame": 85, "sec": 10.415, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1754}
+{"frame": 86, "sec": 10.584, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1827}
+{"frame": 87, "sec": 10.187, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1800}
+{"frame": 88, "sec": 10.412, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1706}
+{"frame": 89, "sec": 10.43, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1663}
+{"frame": 90, "sec": 10.068, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1666}
+{"frame": 91, "sec": 10.145, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1775}
+{"frame": 92, "sec": 9.878, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1732}
+{"frame": 93, "sec": 10.135, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1777}
+{"frame": 94, "sec": 10.377, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1821}
+{"frame": 95, "sec": 10.117, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1693}
+{"frame": 96, "sec": 10.139, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1804}
+{"frame": 97, "sec": 10.301, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1785}
+{"frame": 98, "sec": 10.026, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1763}
+{"frame": 99, "sec": 10.237, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1848}
+{"frame": 100, "sec": 10.015, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1834}
+{"frame": 101, "sec": 10.317, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1798}
+{"frame": 102, "sec": 9.818, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1853}
+{"frame": 103, "sec": 10.351, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1790}
+{"frame": 104, "sec": 9.153, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1491}
+{"frame": 105, "sec": 10.517, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1561}
+{"frame": 106, "sec": 9.826, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1610}
+{"frame": 107, "sec": 10.117, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1675}
+{"frame": 108, "sec": 9.518, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1595}
+{"frame": 109, "sec": 9.883, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1678}
+{"frame": 110, "sec": 10.288, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1694}
+{"frame": 111, "sec": 10.468, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1639}
+{"frame": 112, "sec": 9.896, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1719}
+{"frame": 113, "sec": 9.748, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1756}
+{"frame": 114, "sec": 10.5, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1734}
+{"frame": 115, "sec": 10.057, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1658}
+{"frame": 116, "sec": 10.813, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1709}
+{"frame": 117, "sec": 10.516, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1679}
+{"frame": 118, "sec": 10.656, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1640}
+{"frame": 119, "sec": 10.031, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1697}
+{"frame": 120, "sec": 10.492, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1680}
+{"frame": 121, "sec": 10.143, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1704}
+{"frame": 122, "sec": 9.953, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1729}
+{"frame": 123, "sec": 10.495, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1692}
+{"frame": 124, "sec": 10.466, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1733}
+{"frame": 125, "sec": 10.201, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1752}
+{"frame": 126, "sec": 9.912, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1806}
+{"frame": 127, "sec": 9.937, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1780}
+{"frame": 128, "sec": 9.624, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1732}
+{"frame": 129, "sec": 9.855, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1769}
+{"frame": 130, "sec": 9.662, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1711}
+{"frame": 131, "sec": 9.738, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1732}
+{"frame": 132, "sec": 9.758, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1779}
+{"frame": 133, "sec": 10.041, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1816}
+{"frame": 134, "sec": 9.44, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1458}
+{"frame": 135, "sec": 10.046, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1574}
+{"frame": 136, "sec": 10.415, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1636}
+{"frame": 137, "sec": 9.554, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1658}
+{"frame": 138, "sec": 10.677, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1717}
+{"frame": 139, "sec": 10.28, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1608}
+{"frame": 140, "sec": 10.239, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1679}
+{"frame": 141, "sec": 10.487, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1702}
+{"frame": 142, "sec": 10.078, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1626}
+{"frame": 143, "sec": 10.964, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1648}
+{"frame": 144, "sec": 10.405, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1658}
+{"frame": 145, "sec": 10.301, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1686}
+{"frame": 146, "sec": 10.563, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1702}
+{"frame": 147, "sec": 10.398, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1670}
+{"frame": 148, "sec": 10.695, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1710}
+{"frame": 149, "sec": 10.568, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1697}
+{"frame": 150, "sec": 10.485, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1683}
+{"frame": 151, "sec": 10.223, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1751}
+{"frame": 152, "sec": 9.911, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1717}
+{"frame": 153, "sec": 10.394, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1773}
+{"frame": 154, "sec": 9.77, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1792}
+{"frame": 155, "sec": 10.346, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1709}
+{"frame": 156, "sec": 10.654, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1722}
+{"frame": 157, "sec": 10.369, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1716}
+{"frame": 158, "sec": 10.864, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1862}
+{"frame": 159, "sec": 10.755, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1735}
+{"frame": 160, "sec": 10.582, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1820}
+{"frame": 161, "sec": 10.382, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1792}
+{"frame": 162, "sec": 11.043, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1804}
+{"frame": 163, "sec": 11.046, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1815}
+{"frame": 164, "sec": 9.61, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1504}
+{"frame": 165, "sec": 10.928, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1595}
+{"frame": 166, "sec": 10.864, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1663}
+{"frame": 167, "sec": 10.48, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1632}
+{"frame": 168, "sec": 10.179, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1636}
+{"frame": 169, "sec": 10.606, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1583}
+{"frame": 170, "sec": 10.196, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1622}
+{"frame": 171, "sec": 9.979, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1652}
+{"frame": 172, "sec": 9.891, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1616}
+{"frame": 173, "sec": 9.544, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1613}
+{"frame": 174, "sec": 9.399, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1686}
+{"frame": 175, "sec": 9.464, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1666}
+{"frame": 176, "sec": 9.678, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1606}
+{"frame": 177, "sec": 10.107, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1623}
+{"frame": 178, "sec": 9.496, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1657}
+{"frame": 179, "sec": 9.925, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1661}
+{"frame": 180, "sec": 10.155, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1705}
+{"frame": 181, "sec": 10.105, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1752}
+{"frame": 182, "sec": 9.916, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1705}
+{"frame": 183, "sec": 9.664, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1666}
+{"frame": 184, "sec": 9.908, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1763}
+{"frame": 185, "sec": 10.263, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1742}
+{"frame": 186, "sec": 10.231, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1719}
+{"frame": 187, "sec": 10.571, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1718}
+{"frame": 188, "sec": 10.211, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1697}
+{"frame": 189, "sec": 10.178, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1746}
+{"frame": 190, "sec": 10.119, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1779}
+{"frame": 191, "sec": 9.84, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1817}
+{"frame": 192, "sec": 10.717, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1792}
+{"frame": 193, "sec": 10.874, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1854}
+{"frame": 194, "sec": 9.597, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1478}
+{"frame": 195, "sec": 9.818, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1537}
+{"frame": 196, "sec": 9.374, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1589}
+{"frame": 197, "sec": 9.742, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1646}
+{"frame": 198, "sec": 9.83, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1611}
+{"frame": 199, "sec": 9.658, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1658}
+{"frame": 200, "sec": 9.411, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1689}
+{"frame": 201, "sec": 10.023, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1619}
+{"frame": 202, "sec": 9.403, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1621}
+{"frame": 203, "sec": 9.813, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1610}
+{"frame": 204, "sec": 9.747, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1731}
+{"frame": 205, "sec": 9.673, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1707}
+{"frame": 206, "sec": 9.471, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1659}
+{"frame": 207, "sec": 9.336, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1663}
+{"frame": 208, "sec": 9.353, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1710}
+{"frame": 209, "sec": 9.561, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1685}
+{"frame": 210, "sec": 9.741, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1757}
+{"frame": 211, "sec": 9.359, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1724}
+{"frame": 212, "sec": 9.57, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1711}
+{"frame": 213, "sec": 9.577, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1671}
+{"frame": 214, "sec": 9.667, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1712}
+{"frame": 215, "sec": 9.637, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1756}
+{"frame": 216, "sec": 9.4, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1710}
+{"frame": 217, "sec": 9.998, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1788}
+{"frame": 218, "sec": 10.111, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1756}
+{"frame": 219, "sec": 9.957, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1733}
+{"frame": 220, "sec": 10.1, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1745}
+{"frame": 221, "sec": 10.211, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1744}
+{"frame": 222, "sec": 9.904, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1723}
+{"frame": 223, "sec": 10.036, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1789}
+{"frame": 224, "sec": 8.998, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1392}
+{"frame": 225, "sec": 10.024, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1516}
+{"frame": 226, "sec": 9.694, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1593}
+{"frame": 227, "sec": 9.356, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1617}
+{"frame": 228, "sec": 9.835, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1540}
+{"frame": 229, "sec": 9.693, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1557}
+{"frame": 230, "sec": 10.008, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1620}
+{"frame": 231, "sec": 10.465, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1565}
+{"frame": 232, "sec": 9.877, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1556}
+{"frame": 233, "sec": 9.741, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1606}
+{"frame": 234, "sec": 9.47, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1541}
+{"frame": 235, "sec": 9.661, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1571}
+{"frame": 236, "sec": 9.632, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1641}
+{"frame": 237, "sec": 9.706, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1653}
+{"frame": 238, "sec": 10.049, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1608}
+{"frame": 239, "sec": 9.937, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1580}
+{"frame": 240, "sec": 9.899, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1658}
+{"frame": 241, "sec": 10.131, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1647}
+{"frame": 242, "sec": 9.975, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1654}
+{"frame": 243, "sec": 9.98, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1670}
+{"frame": 244, "sec": 9.628, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1626}
+{"frame": 245, "sec": 9.909, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1654}
+{"frame": 246, "sec": 10.171, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1640}
+{"frame": 247, "sec": 10.43, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1721}
+{"frame": 248, "sec": 10.059, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1706}
+{"frame": 249, "sec": 10.311, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1681}
+{"frame": 250, "sec": 10.169, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1712}
+{"frame": 251, "sec": 10.073, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1724}
+{"frame": 252, "sec": 9.909, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1726}
+{"frame": 253, "sec": 10.177, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1752}
+{"frame": 254, "sec": 9.522, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1395}
+{"frame": 255, "sec": 10.003, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1481}
+{"frame": 256, "sec": 10.069, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1550}
+{"frame": 257, "sec": 10.301, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1566}
+{"frame": 258, "sec": 9.662, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1502}
+{"frame": 259, "sec": 10.411, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1587}
+{"frame": 260, "sec": 9.704, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1582}
+{"frame": 261, "sec": 9.937, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1590}
+{"frame": 262, "sec": 9.767, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1610}
+{"frame": 263, "sec": 9.782, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1590}
+{"frame": 264, "sec": 10.04, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1598}
+{"frame": 265, "sec": 9.465, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1627}
+{"frame": 266, "sec": 9.986, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1604}
+{"frame": 267, "sec": 9.847, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1589}
+{"frame": 268, "sec": 9.68, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1621}
+{"frame": 269, "sec": 9.278, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1613}
+{"frame": 270, "sec": 9.501, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1628}
+{"frame": 271, "sec": 9.917, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1641}
+{"frame": 272, "sec": 10.28, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1679}
+{"frame": 273, "sec": 9.427, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1677}
+{"frame": 274, "sec": 9.188, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1630}
+{"frame": 275, "sec": 9.107, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1718}
+{"frame": 276, "sec": 9.537, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1728}
+{"frame": 277, "sec": 9.844, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1710}
+{"frame": 278, "sec": 9.926, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1744}
+{"frame": 279, "sec": 10.181, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1743}
+{"frame": 280, "sec": 9.983, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1695}
+{"frame": 281, "sec": 9.949, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1762}
+{"frame": 282, "sec": 9.931, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1728}
+{"frame": 283, "sec": 9.379, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1719}
+{"frame": 284, "sec": 9.1, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1432}
+{"frame": 285, "sec": 10.662, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1539}
+{"frame": 286, "sec": 10.459, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1524}
+{"frame": 287, "sec": 9.996, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1602}
+{"frame": 288, "sec": 9.715, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1630}
+{"frame": 289, "sec": 9.407, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1645}
+{"frame": 290, "sec": 9.779, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1688}
+{"frame": 291, "sec": 9.925, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1540}
+{"frame": 292, "sec": 10.374, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1633}
+{"frame": 293, "sec": 9.826, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1609}
+{"frame": 294, "sec": 10.093, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1684}
+{"frame": 295, "sec": 9.66, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1622}
+{"frame": 296, "sec": 9.921, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1619}
+{"frame": 297, "sec": 9.645, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1663}
+{"frame": 298, "sec": 9.685, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1640}
+{"frame": 299, "sec": 9.314, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1742}
+{"frame": 300, "sec": 9.771, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1716}
+{"frame": 301, "sec": 9.654, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1641}
+{"frame": 302, "sec": 9.403, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1670}
+{"frame": 303, "sec": 9.576, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1622}
+{"frame": 304, "sec": 9.84, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1661}
+{"frame": 305, "sec": 9.66, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1676}
+{"frame": 306, "sec": 7.77, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1804}
+{"frame": 307, "sec": 9.868, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1855}
+{"frame": 308, "sec": 10.265, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1814}
+{"frame": 309, "sec": 10.0, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1862}
+{"frame": 310, "sec": 10.25, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1856}
+{"frame": 311, "sec": 9.694, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1927}
+{"frame": 312, "sec": 9.774, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1837}
+{"frame": 313, "sec": 10.067, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1845}
+{"frame": 314, "sec": 9.443, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1500}
+{"frame": 315, "sec": 10.543, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1641}
+{"frame": 316, "sec": 10.361, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1607}
+{"frame": 317, "sec": 9.878, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1710}
+{"frame": 318, "sec": 9.898, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1690}
+{"frame": 319, "sec": 10.678, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1663}
+{"frame": 320, "sec": 9.985, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1772}
+{"frame": 321, "sec": 10.524, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1735}
+{"frame": 322, "sec": 10.369, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1782}
+{"frame": 323, "sec": 10.083, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1829}
+{"frame": 324, "sec": 10.522, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1795}
+{"frame": 325, "sec": 10.272, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1708}
+{"frame": 326, "sec": 10.331, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1752}
+{"frame": 327, "sec": 10.563, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1784}
+{"frame": 328, "sec": 10.851, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1817}
+{"frame": 329, "sec": 10.413, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1720}
+{"frame": 330, "sec": 10.644, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1728}
+{"frame": 331, "sec": 11.0, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1839}
+{"frame": 332, "sec": 10.753, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1809}
+{"frame": 333, "sec": 10.787, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1782}
+{"frame": 334, "sec": 10.934, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1754}
+{"frame": 335, "sec": 10.153, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1846}
+{"frame": 336, "sec": 10.028, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1792}
+{"frame": 337, "sec": 10.492, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1894}
+{"frame": 338, "sec": 10.734, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1861}
+{"frame": 339, "sec": 10.151, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1796}
+{"frame": 340, "sec": 9.519, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1840}
+{"frame": 341, "sec": 10.105, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1865}
+{"frame": 342, "sec": 10.155, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1820}
+{"frame": 343, "sec": 10.278, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1878}
+{"frame": 344, "sec": 9.846, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1500}
+{"frame": 345, "sec": 10.728, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1568}
+{"frame": 346, "sec": 10.361, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1593}
+{"frame": 347, "sec": 10.155, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1622}
+{"frame": 348, "sec": 10.38, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1619}
+{"frame": 349, "sec": 10.153, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1696}
+{"frame": 350, "sec": 10.021, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1724}
+{"frame": 351, "sec": 10.283, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1733}
+{"frame": 352, "sec": 10.541, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1787}
+{"frame": 353, "sec": 10.049, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1748}
+{"frame": 354, "sec": 10.728, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1678}
+{"frame": 355, "sec": 10.059, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1724}
+{"frame": 356, "sec": 10.547, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1775}
+{"frame": 357, "sec": 10.634, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1704}
+{"frame": 358, "sec": 10.409, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1750}
+{"frame": 359, "sec": 10.572, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1748}
+{"frame": 360, "sec": 10.579, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1721}
+{"frame": 361, "sec": 10.202, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1796}
+{"frame": 362, "sec": 10.785, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1774}
+{"frame": 363, "sec": 10.869, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1735}
+{"frame": 364, "sec": 10.482, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1741}
+{"frame": 365, "sec": 10.998, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1849}
+{"frame": 366, "sec": 10.652, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1860}
+{"frame": 367, "sec": 10.148, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1815}
+{"frame": 368, "sec": 10.597, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1863}
+{"frame": 369, "sec": 11.086, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1754}
+{"frame": 370, "sec": 10.623, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1784}
+{"frame": 371, "sec": 10.641, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1802}
+{"frame": 372, "sec": 11.381, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1827}
+{"frame": 373, "sec": 10.72, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1865}
+{"frame": 374, "sec": 10.191, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1498}
+{"frame": 375, "sec": 11.079, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1646}
+{"frame": 376, "sec": 11.04, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1694}
+{"frame": 377, "sec": 10.827, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1762}
+{"frame": 378, "sec": 11.112, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1615}
+{"frame": 379, "sec": 10.898, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1623}
+{"frame": 380, "sec": 10.672, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1725}
+{"frame": 381, "sec": 10.929, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1678}
+{"frame": 382, "sec": 10.79, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1708}
+{"frame": 383, "sec": 10.028, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1659}
+{"frame": 384, "sec": 10.38, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1733}
+{"frame": 385, "sec": 11.098, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1743}
+{"frame": 386, "sec": 10.916, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1699}
+{"frame": 387, "sec": 10.934, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1704}
+{"frame": 388, "sec": 11.15, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1780}
+{"frame": 389, "sec": 11.187, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1764}
+{"frame": 390, "sec": 11.026, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1672}
+{"frame": 391, "sec": 10.547, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1819}
+{"frame": 392, "sec": 10.603, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1721}
+{"frame": 393, "sec": 10.671, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1743}
+{"frame": 394, "sec": 10.855, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1763}
+{"frame": 395, "sec": 10.842, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1788}
+{"frame": 396, "sec": 10.843, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1794}
+{"frame": 397, "sec": 11.906, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1789}
+{"frame": 398, "sec": 11.183, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1775}
+{"frame": 399, "sec": 11.461, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1788}
+{"frame": 400, "sec": 11.14, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1747}
+{"frame": 401, "sec": 11.214, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1837}
+{"frame": 402, "sec": 11.437, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1921}
+{"frame": 403, "sec": 11.023, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1914}
+{"frame": 404, "sec": 10.91, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1516}
+{"frame": 405, "sec": 11.395, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1635}
+{"frame": 406, "sec": 11.019, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1678}
+{"frame": 407, "sec": 11.153, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1754}
+{"frame": 408, "sec": 11.002, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1716}
+{"frame": 409, "sec": 11.378, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1734}
+{"frame": 410, "sec": 11.779, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1626}
+{"frame": 411, "sec": 11.149, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1662}
+{"frame": 412, "sec": 11.107, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1723}
+{"frame": 413, "sec": 11.213, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1755}
+{"frame": 414, "sec": 11.086, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1662}
+{"frame": 415, "sec": 11.326, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1784}
+{"frame": 416, "sec": 11.125, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1740}
+{"frame": 417, "sec": 10.52, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1676}
+{"frame": 418, "sec": 11.578, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1753}
+{"frame": 419, "sec": 11.175, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1739}
+{"frame": 420, "sec": 11.458, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1698}
+{"frame": 421, "sec": 10.85, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1712}
+{"frame": 422, "sec": 10.957, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1763}
+{"frame": 423, "sec": 10.972, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1851}
+{"frame": 424, "sec": 10.811, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1854}
+{"frame": 425, "sec": 11.161, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1766}
+{"frame": 426, "sec": 10.944, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1753}
+{"frame": 427, "sec": 11.106, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1762}
+{"frame": 428, "sec": 11.017, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1836}
+{"frame": 429, "sec": 10.959, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1870}
+{"frame": 430, "sec": 10.895, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1780}
+{"frame": 431, "sec": 10.514, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1765}
+{"frame": 432, "sec": 10.632, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1776}
+{"frame": 433, "sec": 11.061, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1856}
+{"frame": 434, "sec": 9.592, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1489}
+{"frame": 435, "sec": 10.858, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1585}
+{"frame": 436, "sec": 10.217, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1651}
+{"frame": 437, "sec": 10.254, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1602}
+{"frame": 438, "sec": 11.222, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1639}
+{"frame": 439, "sec": 10.601, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1692}
+{"frame": 440, "sec": 10.603, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1705}
+{"frame": 441, "sec": 10.496, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1636}
+{"frame": 442, "sec": 9.976, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1669}
+{"frame": 443, "sec": 9.811, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1650}
+{"frame": 444, "sec": 10.082, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1640}
+{"frame": 445, "sec": 9.935, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1712}
+{"frame": 446, "sec": 9.902, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1739}
+{"frame": 447, "sec": 10.027, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1775}
+{"frame": 448, "sec": 9.65, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1709}
+{"frame": 449, "sec": 9.755, "res": "1080x1920", "samples": 8, "engine": "BLENDER_EEVEE", "rss_mb": 1706}
